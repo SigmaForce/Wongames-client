@@ -1,25 +1,27 @@
 'use client'
 
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  html {
-    font-size: 62.5%; // 1rem = 10px == 10/16px = 62.5% (1.4rem = 14px)
-  }
+  ${({ theme }) => css`
+    html {
+      font-size: 62.5%; // 1rem = 10px == 10/16px = 62.5% (1.4rem = 14px)
+    }
+    
+    body {
+      font-family: ${theme.font.family}
+      font-size: ${theme.font.sizes.medium}
+    }
+  `}
 
-  html, body, #__next {
-    height: 100%;
-  }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
 `
 
 export default GlobalStyles
