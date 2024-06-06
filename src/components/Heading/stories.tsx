@@ -17,13 +17,13 @@ const meta: Meta<HeadingProps> = {
       },
       description: 'Define a cor do texto'
     },
-    lineBottom: {
+    $lineBottom: {
       control: {
         type: 'boolean'
       },
       description: 'Decorators para sublinhado abaixo do texto'
     },
-    lineLeft: {
+    $lineLeft: {
       control: {
         type: 'boolean'
       },

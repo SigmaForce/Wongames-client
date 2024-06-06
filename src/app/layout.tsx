@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import StyledComponentsRegistry from '@/lib/registry'
 import { Providers } from './providers'
-import { poppins } from '@/styles/fonts'
+import { poppins } from '../styles/fonts'
 
 export const metadata: Metadata = {
   title: 'Create Next App',

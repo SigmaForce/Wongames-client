@@ -1,4 +1,3 @@
-import Heading from '../Heading'
 import * as S from './styles'
 
 const Main = ({
@@ -7,7 +6,6 @@ const Main = ({
 }) => {
   return (
     <S.Wrapper>
-      <Heading color="black">Texto Padrão</Heading>
       <S.Title>{title}</S.Title>
       <S.Description>{description}</S.Description>
     </S.Wrapper>
