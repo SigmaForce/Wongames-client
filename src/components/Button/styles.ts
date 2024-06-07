@@ -1,7 +1,9 @@
 import styled, { DefaultTheme, css } from 'styled-components'
 import { ButtonProps } from '.'
 
-type WrapperProps = Pick<ButtonProps, 'size'>
+type WrapperProps = {
+  hasIcon: boolean
+} & Pick<ButtonProps, 'size' | 'fullWidth'>
 
 const WrapperModifiers = {
   small: (theme: DefaultTheme) => css`
@@ -17,16 +19,37 @@ const WrapperModifiers = {
     height: 5rem;
     font-size: ${theme.font.sizes.medium};
     padding: ${theme.spacings.xxsmall} ${theme.spacings.xlarge};
+  `,
+  fullWidth: () => css`
+    width: 100%;
+  `,
+  withIcon: (theme: DefaultTheme) => css`
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 1.6rem;
+
+      & + span {
+        margin-left: ${theme.spacings.xxsmall};
+      }
+    }
   `
 }
 
-export const Wrapper = styled.button<WrapperProps>`
-  ${({ theme, size }) => css`
+export const Wrapper = styled.button.withConfig({
+  shouldForwardProp: (prop) => !['fullWidth', 'hasIcon'].includes(prop)
+})<WrapperProps>`
+  ${({ theme, size, fullWidth, hasIcon }) => css`
     background: linear-gradient(180deg, #ff5f5f 0%, #f062c0 50%);
     color: ${theme.colors.white};
     border: 0;
     border-radius: ${theme.border.radius};
     padding: ${theme.spacings.xxsmall};
+    cursor: pointer;
     ${!!size && WrapperModifiers[size](theme)}
+    ${!!fullWidth && WrapperModifiers.fullWidth()}
+    ${!!hasIcon && WrapperModifiers.withIcon(theme)}
   `}
 `

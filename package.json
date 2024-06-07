@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "test": "jest --passWithNoTests --maxWorkers=50%",
-    "test:watch": "jest --watch --maxWorkers=25%",
+    "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
     "generate": "npx plop --plopfile generators/plopfile.js",
     "start": "next start",
@@ -16,6 +16,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@styled-icons/material-outlined": "^10.47.0",
     "@types/node": "20.12.13",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
