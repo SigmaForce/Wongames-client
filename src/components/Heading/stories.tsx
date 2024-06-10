@@ -28,6 +28,20 @@ const meta: Meta<HeadingProps> = {
         type: 'boolean'
       },
       description: 'Decorators para espaço a esquerda'
+    },
+    lineColor: {
+      control: {
+        type: 'select',
+        options: ['primary', 'secondary']
+      },
+      description: 'Define a cor da barra'
+    },
+    size: {
+      control: {
+        type: 'select',
+        options: ['small', 'medium']
+      },
+      description: 'Define o tamanho do texto'
     }
   }
 }
@@ -39,7 +53,11 @@ type Story = StoryObj<HeadingProps>
 export const Default: Story = {
   args: {
     children: 'Most Populars',
-    color: 'white'
+    color: 'white',
+    $lineBottom: false,
+    $lineLeft: false,
+    lineColor: 'primary',
+    size: 'medium'
   },
   render: (args) => <Heading {...args} />
 }
