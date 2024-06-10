@@ -56,7 +56,7 @@ describe('<Heading />', () => {
 
   it('should render a Heading with a primary line color', () => {
     renderWithTheme(
-      <Heading lineColor="primary" $lineLeft $lineBottom>
+      <Heading $lineColor="primary" $lineLeft $lineBottom>
         Lorem Ipsum
       </Heading>
     )
@@ -70,7 +70,7 @@ describe('<Heading />', () => {
 
   it('should render a Heading with a secondary line color', () => {
     renderWithTheme(
-      <Heading lineColor="secondary" $lineLeft $lineBottom>
+      <Heading $lineColor="secondary" $lineLeft $lineBottom>
         Lorem Ipsum
       </Heading>
     )

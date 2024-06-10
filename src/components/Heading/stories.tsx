@@ -29,7 +29,7 @@ const meta: Meta<HeadingProps> = {
       },
       description: 'Decorators para espaço a esquerda'
     },
-    lineColor: {
+    $lineColor: {
       control: {
         type: 'select',
         options: ['primary', 'secondary']
@@ -56,7 +56,7 @@ export const Default: Story = {
     color: 'white',
     $lineBottom: false,
     $lineLeft: false,
-    lineColor: 'primary',
+    $lineColor: 'primary',
     size: 'medium'
   },
   render: (args) => <Heading {...args} />

@@ -22,7 +22,7 @@ export const Default: Story = {
   args: {
     children: 'Buy Now'
   },
-  render: (args) => <Button {...args} />
+  render: (args: ButtonProps) => <Button {...args} />
 }
 
 export const withIcon: Story = {
@@ -31,5 +31,14 @@ export const withIcon: Story = {
     children: 'Buy Now',
     icon: <AddShoppingCart />
   },
-  render: (args) => <Button {...args} />
+  render: (args: ButtonProps) => <Button {...args} />
+}
+
+export const asLink: Story = {
+  args: {
+    size: 'large',
+    children: 'Buy Now',
+    as: 'a'
+  },
+  render: (args: ButtonProps) => <Button {...args} />
 }
