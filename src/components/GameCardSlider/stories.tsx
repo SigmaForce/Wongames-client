@@ -49,6 +49,15 @@ const items = [
 const meta: Meta<GameCardSliderProps> = {
   title: 'GameCardSlider',
   component: GameCardSlider,
+  argTypes: {
+    color: {
+      control: {
+        type: 'select',
+        options: ['white', 'black']
+      },
+      description: 'Define a cor do logo'
+    }
+  },
   parameters: {
     layout: 'fullscreen',
     backgrounds: {
@@ -62,9 +71,13 @@ export default meta
 type Story = StoryObj<GameCardSliderProps>
 
 export const Default: Story = {
-  render: () => (
+  args: {
+    items: items,
+    color: 'black'
+  },
+  render: (args) => (
     <div style={{ maxWidth: '130rem', margin: '0 auto' }}>
-      <GameCardSlider items={items} />
+      <GameCardSlider {...args} />
     </div>
   )
 }
