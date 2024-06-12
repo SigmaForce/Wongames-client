@@ -9,6 +9,10 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    &::before,
+    &::after {
+      box-sizing: inherit;
+    }
   }
 
   ${({ theme }) => css`
@@ -17,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
     }
     
     body {
+      background-color: ${theme.colors.mainBg};
       font-family: ${theme.font.family}
       font-size: ${theme.font.sizes.medium}
     }
