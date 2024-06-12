@@ -4,8 +4,16 @@ import { Providers } from './providers'
 import { poppins } from '../styles/fonts'
 
 export const metadata: Metadata = {
-  title: 'Won Games',
-  description: 'A Sua Nova plataforma de Jogos'
+  title: {
+    default: 'Won Games',
+    template: '%s | Won Games'
+  },
+  description: 'The best Game Stores in the world!',
+  icons: {
+    icon: '/img/icon-512.png',
+    apple: '/img/icon-512.png'
+  },
+  manifest: '/manifest.json'
 }
 
 export default function RootLayout({

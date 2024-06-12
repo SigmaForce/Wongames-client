@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import Heading from '../Heading'
 import Logo from '../Logo'
