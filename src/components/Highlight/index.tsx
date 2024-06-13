@@ -1,3 +1,4 @@
+'use client'
 import Button from '../Button'
 import * as S from './styles'
 

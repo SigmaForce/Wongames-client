@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 import Highlight, { HighlightProps } from '.'
-
+import item from './mock'
 export default {
   title: 'Highlight',
   component: Highlight,
@@ -34,14 +34,8 @@ export default {
 type Story = StoryObj<HighlightProps>
 
 export const Default: Story = {
-  args: {
-    title: 'Red dead it`s back',
-    subtitle: 'Come see John`s new adventures',
-    buttonLabel: 'Buy now',
-    buttonLink: '/rdr2',
-    backgroundImage: '/img/red-dead-img.jpg'
-  },
-  render: (args) => (
+  args: { ...item },
+  render: (args: HighlightProps) => (
     <div style={{ maxWidth: '104rem' }}>
       <Highlight {...args} />
     </div>
@@ -49,15 +43,8 @@ export const Default: Story = {
 }
 
 export const WithFloatImage: Story = {
-  args: {
-    title: 'Red dead it`s back',
-    subtitle: 'Come see John`s new adventures',
-    buttonLabel: 'Buy now',
-    buttonLink: '/rdr2',
-    backgroundImage: '/img/red-dead-img.jpg',
-    floatImage: '/img/red-dead-float.png'
-  },
-  render: (args) => (
+  args: { ...item },
+  render: (args: HighlightProps) => (
     <div style={{ maxWidth: '104rem' }}>
       <Highlight {...args} />
     </div>
