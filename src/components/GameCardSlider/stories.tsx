@@ -1,3 +1,5 @@
+import { Meta, StoryObj } from '@storybook/react'
+
 import GameCardSlider, { GameCardSliderProps } from '.'
 import items from './mock'
 
@@ -30,7 +32,7 @@ export const Default: Story = {
     items: items,
     color: 'black'
   },
-  render: (args) => (
+  render: (args: GameCardSliderProps) => (
     <div style={{ maxWidth: '130rem', margin: '0 auto' }}>
       <GameCardSlider {...args} />
     </div>

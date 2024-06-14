@@ -3,6 +3,7 @@ import { screen } from '@testing-library/react'
 import Button from '.'
 import { renderWithTheme } from '@/utils/tests/helpers'
 import { AddShoppingCart } from '@styled-icons/material-outlined'
+import { debug } from 'console'
 
 describe('<Button />', () => {
   it('should render the medium size by default', () => {
@@ -38,6 +39,28 @@ describe('<Button />', () => {
     expect(screen.getByRole('button', { name: /Buy Now/i })).toHaveStyle({
       width: '100%'
     })
+  })
+
+  it('should render a minimal version', () => {
+    renderWithTheme(<Button minimal>Buy Now</Button>)
+    debug()
+    expect(screen.getByRole('button', { name: /buy now/i })).toHaveStyleRule(
+      'color',
+      '#F231A5'
+    )
+
+    expect(screen.getByRole('button', { name: /buy now/i })).toHaveStyleRule(
+      'background',
+      'none'
+    )
+
+    expect(screen.getByRole('button', { name: /Buy Now/i })).toHaveStyleRule(
+      'background',
+      'none',
+      {
+        modifier: ':hover'
+      }
+    )
   })
 
   it('should render an button with icon', () => {
