@@ -48,7 +48,7 @@ const Menu = ({ username }: MenuProps) => {
         {!username && (
           <MediaMatch greaterThan="medium">
             <Link href="/sign-in" passHref>
-              <Button as="a">Sign In</Button>
+              <Button>Sign In</Button>
             </Link>
           </MediaMatch>
         )}

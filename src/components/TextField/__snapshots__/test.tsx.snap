@@ -65,6 +65,7 @@ exports[`<TextField /> Renders with error 1`] = `
 
 <div
   class="c0"
+  error="Error message"
 >
   <label
     class="c1 c2"
