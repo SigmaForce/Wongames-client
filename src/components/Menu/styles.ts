@@ -1,3 +1,4 @@
+import NextLink from 'next/link'
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
 
@@ -87,7 +88,8 @@ export const MenuFull = styled.nav<MenuFullProps>`
     flex-direction: column;
     justify-content: space-between;
     background: ${theme.colors.white};
-    position: absolute;
+    position: fixed;
+    z-index: ${theme.layers.menu};
     top: 0;
     bottom: 0;
     left: 0;
@@ -112,7 +114,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
       display: flex;
       align-items: center;
       justify-content: center;
-      flex: 1%;
+      flex: 1;
       flex-direction: column;
     }
 
@@ -124,6 +126,7 @@ export const MenuFull = styled.nav<MenuFullProps>`
       transform: ${$isOpen ? 'translateY(0)' : 'translateY(3rem)'};
       transition: transform 0.3s ease-in-out;
     }
+
     ${RegisterBox} {
       transform: ${$isOpen ? 'translateY(0)' : 'translateY(3rem)'};
       transition: transform 0.3s ease-in-out;
@@ -145,7 +148,7 @@ export const RegisterBox = styled.div`
   `}
 `
 
-export const CreateAccount = styled.a`
+export const CreateAccount = styled(NextLink)`
   ${({ theme }) => css`
     text-decoration: none;
     color: ${theme.colors.primary};

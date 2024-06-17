@@ -3,7 +3,7 @@ import { TextFieldProps } from '.'
 
 type IconPositionProps = Pick<TextFieldProps, 'iconPosition'>
 
-type WrapperProps = Pick<TextFieldProps, 'disabled'> & { error?: boolean }
+type WrapperProps = Pick<TextFieldProps, 'disabled'> & { error?: string }
 
 export const InputWrapper = styled.div`
   ${({ theme }) => css`
@@ -90,7 +90,7 @@ const wrapperModifiers = {
 
 export const Wrapper = styled.div<WrapperProps>`
   ${({ theme, error, disabled }) => css`
-    ${error && wrapperModifiers.error(theme)}
+    ${!!error && wrapperModifiers.error(theme)}
     ${disabled && wrapperModifiers.disabled(theme)}
   `}
 `
