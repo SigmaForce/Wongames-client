@@ -12,9 +12,9 @@ const Auth = ({ title, children }: AuthProps) => (
   <S.Wrapper>
     <S.BannerBlock>
       <S.BannerContent>
-        <Logo />
+        <Logo id="banner" />
         <div>
-          <Heading>All your favorites games in one place</Heading>
+          <Heading size="huge">All your favorites games in one place</Heading>
           <S.Subtitle>
             <strong>WON</strong> is the best and most complete gaming platform.
           </S.Subtitle>
@@ -24,10 +24,11 @@ const Auth = ({ title, children }: AuthProps) => (
     </S.BannerBlock>
     <S.Content>
       <S.ContentWrapper>
-        <Logo color="black" size="large" />
+        <Logo color="black" size="large" id="content" />
         <Heading color="black" $lineColor="secondary" $lineLeft>
           {title}
         </Heading>
+
         {children}
       </S.ContentWrapper>
     </S.Content>
