@@ -3,13 +3,14 @@ import Heading from '../Heading'
 import MediaMatch from '../MediaMatch'
 import * as S from './styles'
 
-type Platform = 'windows' | 'linux' | 'mac'
+type platform = 'windows' | 'linux' | 'mac'
 
 type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18'
 
 export type GameDetailsProps = {
   developer: string
-  platforms: Platform[]
+  publisher: string
+  platforms: platform[]
   releaseDate: string
   rating: Rating
   genres: string[]
@@ -17,6 +18,7 @@ export type GameDetailsProps = {
 
 const GameDetails = ({
   developer,
+  publisher,
   releaseDate,
   platforms,
   rating,
@@ -55,7 +57,7 @@ const GameDetails = ({
         <S.Block>
           <S.Label>Platforms</S.Label>
           <S.IconsWrapper>
-            {platforms.map((icon: Platform) => (
+            {platforms.map((icon: platform) => (
               <S.Icon key={icon}>{platformIcons[icon]}</S.Icon>
             ))}
           </S.IconsWrapper>
@@ -63,7 +65,7 @@ const GameDetails = ({
 
         <S.Block>
           <S.Label>Publisher</S.Label>
-          <S.Description>2K</S.Description>
+          <S.Description>{publisher}</S.Description>
         </S.Block>
 
         <S.Block>
