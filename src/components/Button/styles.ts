@@ -41,14 +41,21 @@ const WrapperModifiers = {
     &:hover {
       color: ${darken(0.1, theme.colors.primary)};
     }
+  `,
+
+  disabled: () => css`
+    &:disabled {
+      cursor: not-allowed;
+      filter: saturate(30%);
+    }
   `
 }
 
 export const Wrapper = styled.button.withConfig({
   shouldForwardProp: (prop) =>
-    !['fullWidth', 'hasIcon', 'minimal'].includes(prop)
+    !['fullWidth', 'hasIcon', 'minimal', 'disabled'].includes(prop)
 })<WrapperProps>`
-  ${({ theme, size, fullWidth, hasIcon, minimal }) => css`
+  ${({ theme, size, fullWidth, hasIcon, minimal, disabled }) => css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -65,9 +72,10 @@ export const Wrapper = styled.button.withConfig({
         : 'linear-gradient(180deg, #e35565 0%, #d958a6 50%)'};
     }
 
-    ${!!size && WrapperModifiers[size](theme)}
-    ${!!fullWidth && WrapperModifiers.fullWidth()}
-    ${!!hasIcon && WrapperModifiers.withIcon(theme)}
-    ${!!minimal && WrapperModifiers.minimal(theme)}
+    ${!!size && WrapperModifiers[size](theme)};
+    ${!!fullWidth && WrapperModifiers.fullWidth()};
+    ${!!hasIcon && WrapperModifiers.withIcon(theme)};
+    ${!!minimal && WrapperModifiers.minimal(theme)};
+    ${disabled && WrapperModifiers.disabled()};
   `}
 `
