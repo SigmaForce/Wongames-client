@@ -53,7 +53,7 @@ const WrapperModifiers = {
 
 export const Wrapper = styled.button.withConfig({
   shouldForwardProp: (prop) =>
-    !['fullWidth', 'hasIcon', 'minimal', 'disabled'].includes(prop)
+    !['fullWidth', 'hasIcon', 'minimal'].includes(prop)
 })<WrapperProps>`
   ${({ theme, size, fullWidth, hasIcon, minimal, disabled }) => css`
     display: inline-flex;
