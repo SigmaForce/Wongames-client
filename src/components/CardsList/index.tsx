@@ -1,3 +1,4 @@
+'use client'
 import Heading from '../Heading'
 import { PaymentCard } from '../PaymentOptions'
 import * as S from './styles'
