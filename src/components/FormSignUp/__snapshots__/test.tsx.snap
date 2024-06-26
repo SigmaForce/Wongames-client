@@ -121,7 +121,6 @@ exports[`<FormSignUp /> should render the form 1`] = `
         </div>
         <input
           class="c5"
-          name="name"
           placeholder="Name"
           type="name"
           value=""
@@ -152,7 +151,6 @@ exports[`<FormSignUp /> should render the form 1`] = `
         </div>
         <input
           class="c5"
-          name="email"
           placeholder="Email"
           type="email"
           value=""
@@ -183,7 +181,6 @@ exports[`<FormSignUp /> should render the form 1`] = `
         </div>
         <input
           class="c5"
-          name="password"
           placeholder="Password"
           type="password"
           value=""
@@ -214,7 +211,6 @@ exports[`<FormSignUp /> should render the form 1`] = `
         </div>
         <input
           class="c5"
-          name="confirm-password"
           placeholder="Confirm password"
           type="password"
           value=""
