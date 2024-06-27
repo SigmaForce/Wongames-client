@@ -34,6 +34,7 @@ const Checkbox = ({
       <S.Input
         type="checkbox"
         id={labelFor}
+        checked={checked}
         onChange={onChange}
         value={value}
         {...props}

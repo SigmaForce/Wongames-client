@@ -20,8 +20,19 @@ type Story = StoryObj<ExploreSidebarProps>
 
 export const Default: Story = {
   render: (args) => (
-    <div style={{ maxWidth: 850, margin: 'auto' }}>
+    <div style={{ padding: 16, maxWidth: 320 }}>
       <ExploreSidebar {...args} />
+    </div>
+  )
+}
+
+export const WithInitialValues: Story = {
+  render: (args) => (
+    <div style={{ padding: 16, maxWidth: 320 }}>
+      <ExploreSidebar
+        {...args}
+        initialValues={{ windows: true, sort_by: 'low-to-high' }}
+      />
     </div>
   )
 }
