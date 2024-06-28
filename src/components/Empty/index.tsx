@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import * as S from './styles'
 import Button from '../Button'
@@ -20,7 +21,7 @@ const Empty = ({ title, description, hasLink }: EmptyProps) => (
     <S.Description>{description}</S.Description>
     {hasLink && (
       <Link href="/" passHref>
-        <Button as="a">Go back to store</Button>
+        <Button>Go back to store</Button>
       </Link>
     )}
   </S.Wrapper>
