@@ -26,3 +26,11 @@ export const Default: Story = {
     </div>
   )
 }
+
+export const WithButton: Story = {
+  render: (args) => (
+    <div style={{ maxWidth: 800 }}>
+      <CartList {...args} hasButton />
+    </div>
+  )
+}
