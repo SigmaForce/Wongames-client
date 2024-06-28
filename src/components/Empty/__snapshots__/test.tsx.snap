@@ -4,7 +4,7 @@ exports[`<Empty /> should render correctly 1`] = `
 .c0 {
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   text-align: center;
 }
 
@@ -46,7 +46,7 @@ exports[`<Empty /> should render correctly 1`] = `
 
 <body>
   <div>
-    <main
+    <div
       class="c0"
     >
       <img
@@ -76,7 +76,7 @@ exports[`<Empty /> should render correctly 1`] = `
           </span>
         </a>
       </a>
-    </main>
+    </div>
   </div>
 </body>
 `;
