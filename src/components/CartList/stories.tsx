@@ -34,3 +34,11 @@ export const WithButton: Story = {
     </div>
   )
 }
+
+export const Empty: Story = {
+  render: () => (
+    <div style={{ maxWidth: 800 }}>
+      <CartList />
+    </div>
+  )
+}
