@@ -1,3 +1,4 @@
+import NextLink from 'next/link'
 import styled, { DefaultTheme, css } from 'styled-components'
 
 export const Wrapper = styled.article`
@@ -48,6 +49,10 @@ export const ImageBox = styled.div`
       background-position: 40rem 0;
     }
   }
+`
+
+export const Link = styled(NextLink)`
+  text-decoration: none;
 `
 
 export const Info = styled.div`

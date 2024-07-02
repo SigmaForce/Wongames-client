@@ -25,7 +25,7 @@ describe('<GameCard />', () => {
       props.img
     )
 
-    expect(screen.getByRole('link')).toHaveAttribute(
+    expect(screen.getByRole('link', { name: props.title })).toHaveAttribute(
       'href',
       `/game/${props.slug}`
     )

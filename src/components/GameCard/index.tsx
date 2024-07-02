@@ -6,7 +6,6 @@ import {
 import * as S from './styles'
 import Button from '../Button'
 import Ribbon, { RibbonColors, RibbonSize } from '../Ribbon'
-import Link from 'next/link'
 
 export type GameCardProps = {
   slug?: string | null | undefined
@@ -41,29 +40,32 @@ const GameCard = ({
         {ribbon}
       </Ribbon>
     )}
-    <Link href={`/game/${slug}`}>
+    <S.Link href={`/game/${slug}`}>
       <S.ImageBox>
         <img src={img} alt={title} />
       </S.ImageBox>
-      <S.Content>
+    </S.Link>
+
+    <S.Content>
+      <S.Link href={`/game/${slug}`}>
         <S.Info>
           <S.Title>{title}</S.Title>
           <S.Developer>{developer}</S.Developer>
         </S.Info>
-        <S.FavButton role="button" onClick={onFav}>
-          {favorite ? (
-            <Favorite aria-label="Remove from Wishlist" />
-          ) : (
-            <FavoriteBorder aria-label="Add to Wishlist" />
-          )}
-        </S.FavButton>
-        <S.BuyBox>
-          {!!promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
-          <S.Price>{promotionalPrice || price}</S.Price>
-          <Button icon={<AddShoppingCart />} size="small" />
-        </S.BuyBox>
-      </S.Content>
-    </Link>
+      </S.Link>
+      <S.FavButton role="button" onClick={onFav}>
+        {favorite ? (
+          <Favorite aria-label="Remove from Wishlist" />
+        ) : (
+          <FavoriteBorder aria-label="Add to Wishlist" />
+        )}
+      </S.FavButton>
+      <S.BuyBox>
+        {!!promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
+        <S.Price>{promotionalPrice || price}</S.Price>
+        <Button icon={<AddShoppingCart />} size="small" />
+      </S.BuyBox>
+    </S.Content>
   </S.Wrapper>
 )
 

@@ -3,7 +3,8 @@ import { initializeApollo } from '@/utils/apollo'
 
 import filterItensMock from '@/components/ExploreSidebar/mock'
 import { QUERY_GAMES } from '@/graphql/queries/games'
-import { QueryGamesQuery, QueryGamesQueryVariables } from '@/graphql/generated'
+import { QueryGamesQuery } from '@/graphql/generated/index'
+import { QueryGamesQueryVariables } from '@/graphql/generated/index'
 
 export const revalidate = 60
 
