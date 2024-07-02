@@ -1,4 +1,5 @@
 'use client'
+
 import GameCard, { GameCardProps } from '@/components/GameCard'
 import * as S from './styles'
 import Base from '../Base'

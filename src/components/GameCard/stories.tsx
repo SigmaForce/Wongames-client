@@ -54,6 +54,7 @@ type Story = StoryObj<GameCardProps>
 export const Default: Story = {
   args: {
     title: 'Population Zero',
+    slug: 'population-zero',
     developer: 'Rockstar Games',
     img: 'https://www.gstatic.com/earth/social/03_knowledge_card_facebook-001.jpg',
     price: 'R$ 235,00',
@@ -69,6 +70,7 @@ export const Default: Story = {
 export const WithRibbon: Story = {
   args: {
     title: 'Population Zero',
+    slug: 'population-zero',
     developer: 'Rockstar Games',
     img: 'https://www.gstatic.com/earth/social/03_knowledge_card_facebook-001.jpg',
     price: 'R$ 235,00',

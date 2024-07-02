@@ -4,6 +4,7 @@ import { renderWithTheme } from '@/utils/tests/helpers'
 import GameCard from '.'
 
 const props = {
+  slug: 'Population-zero',
   title: 'Population Zero',
   developer: 'Rockstar Games',
   img: 'https://www.gstatic.com/earth/social/03_knowledge_card_facebook-001.jpg',
@@ -22,6 +23,11 @@ describe('<GameCard />', () => {
     expect(screen.getByRole('img', { name: props.title })).toHaveAttribute(
       'src',
       props.img
+    )
+
+    expect(screen.getByRole('link')).toHaveAttribute(
+      'href',
+      `/game/${props.slug}`
     )
 
     expect(screen.getByLabelText(/add to wishlist/i)).toBeInTheDocument()

@@ -6,8 +6,10 @@ import {
 import * as S from './styles'
 import Button from '../Button'
 import Ribbon, { RibbonColors, RibbonSize } from '../Ribbon'
+import Link from 'next/link'
 
 export type GameCardProps = {
+  slug?: string | null | undefined
   title: string
   developer: string
   img: string
@@ -24,6 +26,7 @@ const GameCard = ({
   developer,
   img,
   price,
+  slug,
   title,
   promotionalPrice,
   favorite = false,
@@ -38,27 +41,29 @@ const GameCard = ({
         {ribbon}
       </Ribbon>
     )}
-    <S.ImageBox>
-      <img src={img} alt={title} />
-    </S.ImageBox>
-    <S.Content>
-      <S.Info>
-        <S.Title>{title}</S.Title>
-        <S.Developer>{developer}</S.Developer>
-      </S.Info>
-      <S.FavButton role="button" onClick={onFav}>
-        {favorite ? (
-          <Favorite aria-label="Remove from Wishlist" />
-        ) : (
-          <FavoriteBorder aria-label="Add to Wishlist" />
-        )}
-      </S.FavButton>
-      <S.BuyBox>
-        {!!promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
-        <S.Price>{promotionalPrice || price}</S.Price>
-        <Button icon={<AddShoppingCart />} size="small" />
-      </S.BuyBox>
-    </S.Content>
+    <Link href={`/game/${slug}`}>
+      <S.ImageBox>
+        <img src={img} alt={title} />
+      </S.ImageBox>
+      <S.Content>
+        <S.Info>
+          <S.Title>{title}</S.Title>
+          <S.Developer>{developer}</S.Developer>
+        </S.Info>
+        <S.FavButton role="button" onClick={onFav}>
+          {favorite ? (
+            <Favorite aria-label="Remove from Wishlist" />
+          ) : (
+            <FavoriteBorder aria-label="Add to Wishlist" />
+          )}
+        </S.FavButton>
+        <S.BuyBox>
+          {!!promotionalPrice && <S.Price isPromotional>{price}</S.Price>}
+          <S.Price>{promotionalPrice || price}</S.Price>
+          <Button icon={<AddShoppingCart />} size="small" />
+        </S.BuyBox>
+      </S.Content>
+    </Link>
   </S.Wrapper>
 )
 
