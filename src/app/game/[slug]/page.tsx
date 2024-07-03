@@ -1,48 +1,51 @@
 'use server'
-import Game, { GameTemplateProps } from '@/templates/Game'
-import galleryMock from '@/components/Gallery/mock'
-import gamesMock from '@/components/GameCardSlider/mock'
-import highlightMock from '@/components/Highlight/mock'
+import Game from '@/templates/Game'
+
+import { initializeApollo } from '@/utils/apollo'
+import { QUERY_GAMES_BY_SLUG } from '@/graphql/queries/games'
+import { QueryGamesBySlugQuery } from '@/graphql/generated/index'
+import { QueryGamesBySlugQueryVariables } from '@/graphql/generated/index'
+import { Enum_Game_Rating } from '@/graphql/generated'
+import { platform } from '@/components/GameDetails'
+import { GalleryImageProps } from '@/components/Gallery'
 
 export default async function Index({ params }: { params: { slug: string } }) {
-  const descriptionHTML = `
-    <img src="https://items.gog.com/not_a_cp/ENG_product-page-addons-2020_yellow_on_black.png"><br>
-        * Exclusive Digital Comic - Cyberpunk 2077: Big City Dreams will be available in English only.
-        <hr><p class="module">Korean Voiceover will be added on 11th December 2020.</p><br><img alt="" src="https://items.gog.com/not_a_cp/EN/EN-About-the-Game.png"><br><br><b>Cyberpunk 2077</b> is an open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality. You can customize your character’s cyberware, skillset and playstyle, and explore a vast city where the choices you make shape the story and the world around you.
-        <br><br><img alt="" src="https://items.gog.com/not_a_cp/EN/EN-Mercenary-Outlaw.png"><br><br>
-            Become a cyberpunk, an urban mercenary equipped with cybernetic enhancements and build your legend on the streets of Night City.
-        <br><br><img alt="" src="https://items.gog.com/not_a_cp/EN/EN-City-of-the-Future.png"><br><br>
-            Enter the massive open world of Night City, a place that sets new standards in terms of visuals, complexity and depth.
-        <br><br><img alt="" src="https://items.gog.com/not_a_cp/EN/EN-Eternal-Life.png"><br><br>
-            Take the riskiest job of your life and go after a prototype implant that is the key to immortality.
-        <p class="description__copyrights">
-            CD PROJEKT®, Cyberpunk®, Cyberpunk 2077® are registered trademarks of CD PROJEKT S.A. © 2019
-            CD PROJEKT S.A. All rights reserved. All other copyrights and trademarks are the property of their
-            respective owners.
-        </p>`
-  // Dados simulados para a demo, você pode buscar os dados reais conforme necessário
-  const gameData: GameTemplateProps = {
-    cover:
-      'https://images.gog-statics.com/5643a7c831df452d29005caeca24c28cdbfaa6fbea5a9556b147ee26d325fa70_bg_crop_1366x655.jpg',
+  const apolloClient = initializeApollo()
+
+  const { data } = await apolloClient.query<
+    QueryGamesBySlugQuery,
+    QueryGamesBySlugQueryVariables
+  >({
+    query: QUERY_GAMES_BY_SLUG,
+    variables: { slug: `${params?.slug}` }
+  })
+
+  const gameData = {
+    cover: `http://localhost:1337${data.games!.data[0].attributes!.cover?.data?.attributes?.src}`,
     gameInfo: {
-      title: params.slug,
-      price: '59.00',
-      description:
-        'Cyberpunk 2077 is an open-world, action-adventure story set in Night City, a megalopolis obsessed with power, glamour and body modification. You play as V, a mercenary outlaw going after a one-of-a-kind implant that is the key to immortality'
+      title: data.games!.data[0].attributes!.name,
+      price: data.games!.data[0].attributes!.price,
+      description: data.games!.data[0].attributes!.short_description as string
     },
-    gallery: galleryMock,
-    description: descriptionHTML,
+    gallery: data.games!.data[0].attributes!.gallery!.data.map((image) => ({
+      src: `http://localhost:1337${image.attributes?.url}`,
+      label: image.attributes?.label
+    })) as GalleryImageProps[],
+    description: data.games!.data[0].attributes!.description as string,
     details: {
-      developer: 'CD PROJEKT RED',
-      releaseDate: '2020-12-10T23:00:00',
-      platforms: ['windows'], // Este valor é válido
-      publisher: 'CD PROJEKT RED',
-      rating: 'BR18',
-      genres: ['Action', 'Role-playing']
-    },
-    upcomingGames: gamesMock,
-    upcomingHighlight: highlightMock,
-    recommendedGames: gamesMock
+      developer: data.games!.data[0].attributes!.developers?.data[0].attributes
+        ?.name as string,
+      releaseDate: data.games!.data[0].attributes!.release_date,
+      platforms: data.games!.data[0].attributes!.platforms!.data.map(
+        (platform) => platform.attributes!.name
+      ) as platform[], // Este valor é válido
+      publisher: data.games?.data[0].attributes?.publisher?.data?.attributes
+        ?.name as string,
+      rating: data.games!.data[0].attributes!.rating as Enum_Game_Rating,
+      genres: data.games?.data[0].attributes!.categories!.data.map(
+        (category) => category.attributes!.name
+      ) as string[]
+    }
   }
 
   return <Game {...gameData} />

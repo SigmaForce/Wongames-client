@@ -17,9 +17,9 @@ export type GameTemplateProps = {
   gallery?: GalleryImageProps[]
   description: string
   details: GameDetailsProps
-  upcomingGames: GameCardProps[]
-  upcomingHighlight: HighlightProps
-  recommendedGames: GameCardProps[]
+  upcomingGames?: GameCardProps[]
+  upcomingHighlight?: HighlightProps
+  recommendedGames?: GameCardProps[]
 }
 
 const Game = ({

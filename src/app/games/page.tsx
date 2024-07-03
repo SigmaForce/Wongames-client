@@ -27,10 +27,7 @@ export default async function GamesPage(props: GamesTemplateProps) {
       game.attributes.cover.data &&
       `http://localhost:1337${game.attributes.cover.data.attributes.url}`,
     developer: game.attributes.developers.data[0].attributes.name,
-    price: new Intl.NumberFormat('en', {
-      style: 'currency',
-      currency: 'USD'
-    }).format(game.attributes.price)
+    price: game.attributes.price
   }))
 
   const filterItems = filterItensMock

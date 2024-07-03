@@ -1380,3 +1380,75 @@ export type QueryGamesQuery = {
     }>
   } | null
 }
+
+export type QueryGamesBySlugQueryVariables = Exact<{
+  slug: Scalars['String']['input']
+}>
+
+export type QueryGamesBySlugQuery = {
+  __typename?: 'Query'
+  games?: {
+    __typename?: 'GameEntityResponseCollection'
+    data: Array<{
+      __typename?: 'GameEntity'
+      attributes?: {
+        __typename?: 'Game'
+        name: string
+        short_description?: string | null
+        description?: string | null
+        price: number
+        rating?: Enum_Game_Rating | null
+        release_date?: any | null
+        gallery?: {
+          __typename?: 'UploadFileRelationResponseCollection'
+          data: Array<{
+            __typename?: 'UploadFileEntity'
+            attributes?: {
+              __typename?: 'UploadFile'
+              url: string
+              label?: string | null
+            } | null
+          }>
+        } | null
+        cover?: {
+          __typename?: 'UploadFileEntityResponse'
+          data?: {
+            __typename?: 'UploadFileEntity'
+            attributes?: { __typename?: 'UploadFile'; src: string } | null
+          } | null
+        } | null
+        developers?: {
+          __typename?: 'DeveloperRelationResponseCollection'
+          data: Array<{
+            __typename?: 'DeveloperEntity'
+            attributes?: { __typename?: 'Developer'; name: string } | null
+          }>
+        } | null
+        publisher?: {
+          __typename?: 'PublisherEntityResponse'
+          data?: {
+            __typename?: 'PublisherEntity'
+            attributes?: {
+              __typename?: 'Publisher'
+              name?: string | null
+            } | null
+          } | null
+        } | null
+        platforms?: {
+          __typename?: 'PlatformRelationResponseCollection'
+          data: Array<{
+            __typename?: 'PlatformEntity'
+            attributes?: { __typename?: 'Platform'; name: string } | null
+          }>
+        } | null
+        categories?: {
+          __typename?: 'CategoryRelationResponseCollection'
+          data: Array<{
+            __typename?: 'CategoryEntity'
+            attributes?: { __typename?: 'Category'; name: string } | null
+          }>
+        } | null
+      } | null
+    }>
+  } | null
+}

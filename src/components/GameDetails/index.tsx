@@ -3,7 +3,7 @@ import Heading from '../Heading'
 import MediaMatch from '../MediaMatch'
 import * as S from './styles'
 
-type platform = 'windows' | 'linux' | 'mac'
+export type platform = 'windows' | 'linux' | 'mac'
 
 type Rating = 'BR0' | 'BR10' | 'BR12' | 'BR14' | 'BR16' | 'BR18'
 

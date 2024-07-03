@@ -18,11 +18,11 @@ export default {
       description: 'Link P/ Imagem do Jogo'
     },
     price: {
-      type: 'string',
+      type: 'number',
       description: 'Preço do Jogo'
     },
     promotionalPrice: {
-      type: 'string',
+      type: 'number',
       description: 'Preço promocional do Jogo'
     },
     onFav: {
@@ -57,8 +57,8 @@ export const Default: Story = {
     slug: 'population-zero',
     developer: 'Rockstar Games',
     img: 'https://www.gstatic.com/earth/social/03_knowledge_card_facebook-001.jpg',
-    price: 'R$ 235,00',
-    promotionalPrice: 'R$ 200,00'
+    price: 235,
+    promotionalPrice: 200
   },
   render: (args: GameCardProps) => (
     <div style={{ width: '30rem' }}>
@@ -73,8 +73,8 @@ export const WithRibbon: Story = {
     slug: 'population-zero',
     developer: 'Rockstar Games',
     img: 'https://www.gstatic.com/earth/social/03_knowledge_card_facebook-001.jpg',
-    price: 'R$ 235,00',
-    promotionalPrice: 'R$ 200,00',
+    price: 235,
+    promotionalPrice: 200,
     ribbon: '20% OFF',
     ribbonSize: 'normal',
     ribbonColor: 'primary'
