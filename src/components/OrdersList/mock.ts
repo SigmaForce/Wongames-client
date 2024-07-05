@@ -1,4 +1,4 @@
-export default [
+const mockOrdersList = [
   {
     img: 'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fG5hdHVyZXxlbnwwfHx8fDE2NjgxNjMyMjA&ixlib=rb-1.2.1&q=80&w=1080',
     title: 'Red Dead Redemption 2',
@@ -24,3 +24,5 @@ export default [
     }
   }
 ]
+
+export default mockOrdersList

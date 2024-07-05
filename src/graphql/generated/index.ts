@@ -32,6 +32,58 @@ export type Scalars = {
   Upload: { input: any; output: any }
 }
 
+export type Banner = {
+  __typename?: 'Banner'
+  button?: Maybe<ComponentPageButton>
+  createdAt?: Maybe<Scalars['DateTime']['output']>
+  image: UploadFileEntityResponse
+  publishedAt?: Maybe<Scalars['DateTime']['output']>
+  ribbon?: Maybe<ComponentPageRibbon>
+  subtitle: Scalars['String']['output']
+  title: Scalars['String']['output']
+  updatedAt?: Maybe<Scalars['DateTime']['output']>
+}
+
+export type BannerEntity = {
+  __typename?: 'BannerEntity'
+  attributes?: Maybe<Banner>
+  id?: Maybe<Scalars['ID']['output']>
+}
+
+export type BannerEntityResponse = {
+  __typename?: 'BannerEntityResponse'
+  data?: Maybe<BannerEntity>
+}
+
+export type BannerEntityResponseCollection = {
+  __typename?: 'BannerEntityResponseCollection'
+  data: Array<BannerEntity>
+  meta: ResponseCollectionMeta
+}
+
+export type BannerFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<BannerFiltersInput>>>
+  button?: InputMaybe<ComponentPageButtonFiltersInput>
+  createdAt?: InputMaybe<DateTimeFilterInput>
+  id?: InputMaybe<IdFilterInput>
+  not?: InputMaybe<BannerFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<BannerFiltersInput>>>
+  publishedAt?: InputMaybe<DateTimeFilterInput>
+  ribbon?: InputMaybe<ComponentPageRibbonFiltersInput>
+  subtitle?: InputMaybe<StringFilterInput>
+  title?: InputMaybe<StringFilterInput>
+  updatedAt?: InputMaybe<DateTimeFilterInput>
+}
+
+export type BannerInput = {
+  button?: InputMaybe<ComponentPageButtonInput>
+  image?: InputMaybe<Scalars['ID']['input']>
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>
+  ribbon?: InputMaybe<ComponentPageRibbonInput>
+  subtitle?: InputMaybe<Scalars['String']['input']>
+  title?: InputMaybe<Scalars['String']['input']>
+}
+
 export type BooleanFilterInput = {
   and?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>
   between?: InputMaybe<Array<InputMaybe<Scalars['Boolean']['input']>>>
@@ -110,6 +162,51 @@ export type CategoryInput = {
 export type CategoryRelationResponseCollection = {
   __typename?: 'CategoryRelationResponseCollection'
   data: Array<CategoryEntity>
+}
+
+export type ComponentPageButton = {
+  __typename?: 'ComponentPageButton'
+  id: Scalars['ID']['output']
+  label: Scalars['String']['output']
+  link: Scalars['String']['output']
+}
+
+export type ComponentPageButtonFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentPageButtonFiltersInput>>>
+  label?: InputMaybe<StringFilterInput>
+  link?: InputMaybe<StringFilterInput>
+  not?: InputMaybe<ComponentPageButtonFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<ComponentPageButtonFiltersInput>>>
+}
+
+export type ComponentPageButtonInput = {
+  id?: InputMaybe<Scalars['ID']['input']>
+  label?: InputMaybe<Scalars['String']['input']>
+  link?: InputMaybe<Scalars['String']['input']>
+}
+
+export type ComponentPageRibbon = {
+  __typename?: 'ComponentPageRibbon'
+  color?: Maybe<Enum_Componentpageribbon_Color>
+  id: Scalars['ID']['output']
+  size?: Maybe<Enum_Componentpageribbon_Size>
+  text?: Maybe<Scalars['String']['output']>
+}
+
+export type ComponentPageRibbonFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentPageRibbonFiltersInput>>>
+  color?: InputMaybe<StringFilterInput>
+  not?: InputMaybe<ComponentPageRibbonFiltersInput>
+  or?: InputMaybe<Array<InputMaybe<ComponentPageRibbonFiltersInput>>>
+  size?: InputMaybe<StringFilterInput>
+  text?: InputMaybe<StringFilterInput>
+}
+
+export type ComponentPageRibbonInput = {
+  color?: InputMaybe<Enum_Componentpageribbon_Color>
+  id?: InputMaybe<Scalars['ID']['input']>
+  size?: InputMaybe<Enum_Componentpageribbon_Size>
+  text?: InputMaybe<Scalars['String']['input']>
 }
 
 export type DateFilterInput = {
@@ -215,6 +312,16 @@ export type DeveloperInput = {
 export type DeveloperRelationResponseCollection = {
   __typename?: 'DeveloperRelationResponseCollection'
   data: Array<DeveloperEntity>
+}
+
+export enum Enum_Componentpageribbon_Color {
+  Primary = 'primary',
+  Secondary = 'secondary'
+}
+
+export enum Enum_Componentpageribbon_Size {
+  Normal = 'normal',
+  Small = 'small'
 }
 
 export enum Enum_Game_Rating {
@@ -359,7 +466,10 @@ export type GameRelationResponseCollection = {
 }
 
 export type GenericMorph =
+  | Banner
   | Category
+  | ComponentPageButton
+  | ComponentPageRibbon
   | Developer
   | Game
   | I18NLocale
@@ -486,6 +596,7 @@ export type Mutation = {
   __typename?: 'Mutation'
   /** Change user password. Confirm with the current password. */
   changePassword?: Maybe<UsersPermissionsLoginPayload>
+  createBanner?: Maybe<BannerEntityResponse>
   createCategory?: Maybe<CategoryEntityResponse>
   createDeveloper?: Maybe<DeveloperEntityResponse>
   createGame?: Maybe<GameEntityResponse>
@@ -497,6 +608,7 @@ export type Mutation = {
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse
+  deleteBanner?: Maybe<BannerEntityResponse>
   deleteCategory?: Maybe<CategoryEntityResponse>
   deleteDeveloper?: Maybe<DeveloperEntityResponse>
   deleteGame?: Maybe<GameEntityResponse>
@@ -519,6 +631,7 @@ export type Mutation = {
   removeFile?: Maybe<UploadFileEntityResponse>
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>
+  updateBanner?: Maybe<BannerEntityResponse>
   updateCategory?: Maybe<CategoryEntityResponse>
   updateDeveloper?: Maybe<DeveloperEntityResponse>
   updateFileInfo: UploadFileEntityResponse
@@ -538,6 +651,10 @@ export type MutationChangePasswordArgs = {
   currentPassword: Scalars['String']['input']
   password: Scalars['String']['input']
   passwordConfirmation: Scalars['String']['input']
+}
+
+export type MutationCreateBannerArgs = {
+  data: BannerInput
 }
 
 export type MutationCreateCategoryArgs = {
@@ -574,6 +691,10 @@ export type MutationCreateUsersPermissionsRoleArgs = {
 
 export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput
+}
+
+export type MutationDeleteBannerArgs = {
+  id: Scalars['ID']['input']
 }
 
 export type MutationDeleteCategoryArgs = {
@@ -643,6 +764,11 @@ export type MutationResetPasswordArgs = {
   code: Scalars['String']['input']
   password: Scalars['String']['input']
   passwordConfirmation: Scalars['String']['input']
+}
+
+export type MutationUpdateBannerArgs = {
+  data: BannerInput
+  id: Scalars['ID']['input']
 }
 
 export type MutationUpdateCategoryArgs = {
@@ -773,6 +899,11 @@ export type PlatformRelationResponseCollection = {
   data: Array<PlatformEntity>
 }
 
+export enum PublicationState {
+  Live = 'LIVE',
+  Preview = 'PREVIEW'
+}
+
 export type Publisher = {
   __typename?: 'Publisher'
   createdAt?: Maybe<Scalars['DateTime']['output']>
@@ -825,6 +956,8 @@ export type PublisherInput = {
 
 export type Query = {
   __typename?: 'Query'
+  banner?: Maybe<BannerEntityResponse>
+  banners?: Maybe<BannerEntityResponseCollection>
   categories?: Maybe<CategoryEntityResponseCollection>
   category?: Maybe<CategoryEntityResponse>
   developer?: Maybe<DeveloperEntityResponse>
@@ -846,6 +979,17 @@ export type Query = {
   usersPermissionsRoles?: Maybe<UsersPermissionsRoleEntityResponseCollection>
   usersPermissionsUser?: Maybe<UsersPermissionsUserEntityResponse>
   usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>
+}
+
+export type QueryBannerArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>
+}
+
+export type QueryBannersArgs = {
+  filters?: InputMaybe<BannerFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  publicationState?: InputMaybe<PublicationState>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
 }
 
 export type QueryCategoriesArgs = {
@@ -1347,6 +1491,30 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>
 }
 
+export type BannerFragmentFragment = {
+  __typename?: 'Banner'
+  title: string
+  subtitle: string
+  image: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      attributes?: { __typename?: 'UploadFile'; url: string } | null
+    } | null
+  }
+  button?: {
+    __typename?: 'ComponentPageButton'
+    label: string
+    link: string
+  } | null
+  ribbon?: {
+    __typename?: 'ComponentPageRibbon'
+    text?: string | null
+    color?: Enum_Componentpageribbon_Color | null
+    size?: Enum_Componentpageribbon_Size | null
+  } | null
+}
+
 export type QueryGamesQueryVariables = Exact<{
   limit: Scalars['Int']['input']
 }>
@@ -1447,6 +1615,41 @@ export type QueryGamesBySlugQuery = {
             __typename?: 'CategoryEntity'
             attributes?: { __typename?: 'Category'; name: string } | null
           }>
+        } | null
+      } | null
+    }>
+  } | null
+}
+
+export type QueryHomeQueryVariables = Exact<{ [key: string]: never }>
+
+export type QueryHomeQuery = {
+  __typename?: 'Query'
+  banners?: {
+    __typename?: 'BannerEntityResponseCollection'
+    data: Array<{
+      __typename?: 'BannerEntity'
+      attributes?: {
+        __typename?: 'Banner'
+        title: string
+        subtitle: string
+        image: {
+          __typename?: 'UploadFileEntityResponse'
+          data?: {
+            __typename?: 'UploadFileEntity'
+            attributes?: { __typename?: 'UploadFile'; url: string } | null
+          } | null
+        }
+        button?: {
+          __typename?: 'ComponentPageButton'
+          label: string
+          link: string
+        } | null
+        ribbon?: {
+          __typename?: 'ComponentPageRibbon'
+          text?: string | null
+          color?: Enum_Componentpageribbon_Color | null
+          size?: Enum_Componentpageribbon_Size | null
         } | null
       } | null
     }>

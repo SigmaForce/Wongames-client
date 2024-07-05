@@ -1,4 +1,4 @@
-export default [
+const mockPaymentOptions = [
   {
     flag: 'visa',
     img: '/img/visa.png',
@@ -10,3 +10,5 @@ export default [
     number: '*** *** **** 4326'
   }
 ]
+
+export default mockPaymentOptions

@@ -1,4 +1,4 @@
-export default [
+const mockCardSlider = [
   {
     title: 'The Witcher 3: Wild Hunt',
     slug: 'the-witcher-3',
@@ -48,3 +48,5 @@ export default [
     promotionalPrice: 260
   }
 ]
+
+export default mockCardSlider
