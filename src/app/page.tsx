@@ -1,44 +1,49 @@
 import Home, { HomeTemplateProps } from '@/templates/Home'
 
-import gamesMock from '@/components/GameCardSlider/mock'
-import HighlightMock from '@/components/Highlight/mock'
 import { initializeApollo } from '@/utils/apollo'
-import { QueryHomeQuery } from '@/graphql/generated/index'
+import {
+  QueryHomeQuery,
+  QueryHomeQueryVariables
+} from '@/graphql/generated/index'
 import { QUERY_HOME } from '@/graphql/queries/home'
 import { BannerProps } from '@/components/Banner'
+import { HighlightProps } from '@/components/Highlight'
+import { bannerMapper, gamesMapper, highlightMapper } from '@/utils/mappers'
+import { GameCardProps } from '@/components/GameCard'
 
 export const revalidate = 60
 
 export default async function Index() {
   const apolloClient = initializeApollo()
-
-  const { data } = await apolloClient.query<QueryHomeQuery>({
-    query: QUERY_HOME
+  const TODAY = new Date().toISOString().slice(0, 10)
+  const {
+    data: { banners, newGames, upcommingGames, freeGames, sections }
+  } = await apolloClient.query<QueryHomeQuery, QueryHomeQueryVariables>({
+    query: QUERY_HOME,
+    variables: { date: TODAY }
   })
 
-  const dataBanners = data.banners?.data.map((banner) => ({
-    img: `http://localhost:1337${banner.attributes?.image.data?.attributes?.url}`,
-    title: banner.attributes?.title,
-    subtitle: banner.attributes?.subtitle,
-    buttonLabel: banner.attributes?.button!.label,
-    buttonLink: banner.attributes?.button!.link,
-    ...(banner.attributes?.ribbon && {
-      ribbon: banner.attributes.ribbon.text,
-      ribbonColor: banner.attributes.ribbon?.color,
-      ribbonSize: banner.attributes.ribbon?.size
-    })
-  })) as BannerProps[]
-
   const props: HomeTemplateProps = {
-    banners: dataBanners,
-    newGames: gamesMock,
-    mostPopularHighlight: HighlightMock,
-    mostPopularGames: gamesMock,
-    upcommingGames: gamesMock,
-    upcommingHighligth: HighlightMock,
-    upcommingMoreGames: gamesMock,
-    freeGames: gamesMock,
-    freeHighligth: HighlightMock
+    banners: bannerMapper(banners) as BannerProps[],
+    newGames: gamesMapper(newGames) as GameCardProps[],
+    newGamesTitle: sections!.data!.attributes!.newGames!.title!,
+    mostPopularHighlight: highlightMapper(
+      sections!.data!.attributes!.popularGames!.highlight
+    ) as HighlightProps,
+    mostPopularGames: gamesMapper(
+      sections!.data!.attributes!.popularGames!.games
+    ) as GameCardProps[],
+    mostPopularGamesTitle: sections!.data!.attributes!.popularGames!.title!,
+    upcommingGames: gamesMapper(upcommingGames) as GameCardProps[],
+    upcommingHighligth: highlightMapper(
+      sections!.data!.attributes!.upcommingGames!.highlight
+    ) as HighlightProps,
+    upcommingGamesTitle: sections!.data!.attributes!.upcommingGames!.title!,
+    freeGames: gamesMapper(freeGames) as GameCardProps[],
+    freeGamesTitle: sections!.data!.attributes!.freeGames!.title!,
+    freeHighligth: highlightMapper(
+      sections!.data!.attributes!.freeGames!.highlight
+    ) as HighlightProps
   }
 
   return <Home {...props} />

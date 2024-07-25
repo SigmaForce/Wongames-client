@@ -185,6 +185,50 @@ export type ComponentPageButtonInput = {
   link?: InputMaybe<Scalars['String']['input']>
 }
 
+export type ComponentPageHighlight = {
+  __typename?: 'ComponentPageHighlight'
+  alignment?: Maybe<Enum_Componentpagehighlight_Alignment>
+  background: UploadFileEntityResponse
+  buttonLabel: Scalars['String']['output']
+  buttonLink: Scalars['String']['output']
+  floatImage?: Maybe<UploadFileEntityResponse>
+  id: Scalars['ID']['output']
+  subtitle: Scalars['String']['output']
+  title: Scalars['String']['output']
+}
+
+export type ComponentPageHighlightInput = {
+  alignment?: InputMaybe<Enum_Componentpagehighlight_Alignment>
+  background?: InputMaybe<Scalars['ID']['input']>
+  buttonLabel?: InputMaybe<Scalars['String']['input']>
+  buttonLink?: InputMaybe<Scalars['String']['input']>
+  floatImage?: InputMaybe<Scalars['ID']['input']>
+  id?: InputMaybe<Scalars['ID']['input']>
+  subtitle?: InputMaybe<Scalars['String']['input']>
+  title?: InputMaybe<Scalars['String']['input']>
+}
+
+export type ComponentPagePopularGames = {
+  __typename?: 'ComponentPagePopularGames'
+  games?: Maybe<GameRelationResponseCollection>
+  highlight?: Maybe<ComponentPageHighlight>
+  id: Scalars['ID']['output']
+  title: Scalars['String']['output']
+}
+
+export type ComponentPagePopularGamesGamesArgs = {
+  filters?: InputMaybe<GameFiltersInput>
+  pagination?: InputMaybe<PaginationArg>
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+}
+
+export type ComponentPagePopularGamesInput = {
+  games?: InputMaybe<Array<InputMaybe<Scalars['ID']['input']>>>
+  highlight?: InputMaybe<ComponentPageHighlightInput>
+  id?: InputMaybe<Scalars['ID']['input']>
+  title?: InputMaybe<Scalars['String']['input']>
+}
+
 export type ComponentPageRibbon = {
   __typename?: 'ComponentPageRibbon'
   color?: Maybe<Enum_Componentpageribbon_Color>
@@ -207,6 +251,19 @@ export type ComponentPageRibbonInput = {
   id?: InputMaybe<Scalars['ID']['input']>
   size?: InputMaybe<Enum_Componentpageribbon_Size>
   text?: InputMaybe<Scalars['String']['input']>
+}
+
+export type ComponentPageSection = {
+  __typename?: 'ComponentPageSection'
+  highlight?: Maybe<ComponentPageHighlight>
+  id: Scalars['ID']['output']
+  title?: Maybe<Scalars['String']['output']>
+}
+
+export type ComponentPageSectionInput = {
+  highlight?: InputMaybe<ComponentPageHighlightInput>
+  id?: InputMaybe<Scalars['ID']['input']>
+  title?: InputMaybe<Scalars['String']['input']>
 }
 
 export type DateFilterInput = {
@@ -312,6 +369,11 @@ export type DeveloperInput = {
 export type DeveloperRelationResponseCollection = {
   __typename?: 'DeveloperRelationResponseCollection'
   data: Array<DeveloperEntity>
+}
+
+export enum Enum_Componentpagehighlight_Alignment {
+  Left = 'left',
+  Right = 'right'
 }
 
 export enum Enum_Componentpageribbon_Color {
@@ -469,9 +531,13 @@ export type GenericMorph =
   | Banner
   | Category
   | ComponentPageButton
+  | ComponentPageHighlight
+  | ComponentPagePopularGames
   | ComponentPageRibbon
+  | ComponentPageSection
   | Developer
   | Game
+  | Home
   | I18NLocale
   | Platform
   | Publisher
@@ -480,6 +546,36 @@ export type GenericMorph =
   | UsersPermissionsPermission
   | UsersPermissionsRole
   | UsersPermissionsUser
+
+export type Home = {
+  __typename?: 'Home'
+  createdAt?: Maybe<Scalars['DateTime']['output']>
+  freeGames?: Maybe<ComponentPageSection>
+  newGames?: Maybe<ComponentPageSection>
+  popularGames?: Maybe<ComponentPagePopularGames>
+  publishedAt?: Maybe<Scalars['DateTime']['output']>
+  upcommingGames?: Maybe<ComponentPageSection>
+  updatedAt?: Maybe<Scalars['DateTime']['output']>
+}
+
+export type HomeEntity = {
+  __typename?: 'HomeEntity'
+  attributes?: Maybe<Home>
+  id?: Maybe<Scalars['ID']['output']>
+}
+
+export type HomeEntityResponse = {
+  __typename?: 'HomeEntityResponse'
+  data?: Maybe<HomeEntity>
+}
+
+export type HomeInput = {
+  freeGames?: InputMaybe<ComponentPageSectionInput>
+  newGames?: InputMaybe<ComponentPageSectionInput>
+  popularGames?: InputMaybe<ComponentPagePopularGamesInput>
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>
+  upcommingGames?: InputMaybe<ComponentPageSectionInput>
+}
 
 export type I18NLocale = {
   __typename?: 'I18NLocale'
@@ -612,6 +708,7 @@ export type Mutation = {
   deleteCategory?: Maybe<CategoryEntityResponse>
   deleteDeveloper?: Maybe<DeveloperEntityResponse>
   deleteGame?: Maybe<GameEntityResponse>
+  deleteHome?: Maybe<HomeEntityResponse>
   deletePlatform?: Maybe<PlatformEntityResponse>
   deletePublisher?: Maybe<PublisherEntityResponse>
   deleteUploadFile?: Maybe<UploadFileEntityResponse>
@@ -636,6 +733,7 @@ export type Mutation = {
   updateDeveloper?: Maybe<DeveloperEntityResponse>
   updateFileInfo: UploadFileEntityResponse
   updateGame?: Maybe<GameEntityResponse>
+  updateHome?: Maybe<HomeEntityResponse>
   updatePlatform?: Maybe<PlatformEntityResponse>
   updatePublisher?: Maybe<PublisherEntityResponse>
   updateUploadFile?: Maybe<UploadFileEntityResponse>
@@ -789,6 +887,10 @@ export type MutationUpdateFileInfoArgs = {
 export type MutationUpdateGameArgs = {
   data: GameInput
   id: Scalars['ID']['input']
+}
+
+export type MutationUpdateHomeArgs = {
+  data: HomeInput
 }
 
 export type MutationUpdatePlatformArgs = {
@@ -964,6 +1066,7 @@ export type Query = {
   developers?: Maybe<DeveloperEntityResponseCollection>
   game?: Maybe<GameEntityResponse>
   games?: Maybe<GameEntityResponseCollection>
+  home?: Maybe<HomeEntityResponse>
   i18NLocale?: Maybe<I18NLocaleEntityResponse>
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>
   me?: Maybe<UsersPermissionsMe>
@@ -1020,6 +1123,10 @@ export type QueryGamesArgs = {
   filters?: InputMaybe<GameFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+}
+
+export type QueryHomeArgs = {
+  publicationState?: InputMaybe<PublicationState>
 }
 
 export type QueryI18NLocaleArgs = {
@@ -1515,6 +1622,50 @@ export type BannerFragmentFragment = {
   } | null
 }
 
+export type GameFragmentFragment = {
+  __typename?: 'Game'
+  name: string
+  slug?: string | null
+  price: number
+  cover?: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      attributes?: { __typename?: 'UploadFile'; url: string } | null
+    } | null
+  } | null
+  developers?: {
+    __typename?: 'DeveloperRelationResponseCollection'
+    data: Array<{
+      __typename?: 'DeveloperEntity'
+      attributes?: { __typename?: 'Developer'; name: string } | null
+    }>
+  } | null
+}
+
+export type HighlightFragmentFragment = {
+  __typename?: 'ComponentPageHighlight'
+  title: string
+  subtitle: string
+  buttonLink: string
+  buttonLabel: string
+  alignment?: Enum_Componentpagehighlight_Alignment | null
+  background: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      attributes?: { __typename?: 'UploadFile'; url: string } | null
+    } | null
+  }
+  floatImage?: {
+    __typename?: 'UploadFileEntityResponse'
+    data?: {
+      __typename?: 'UploadFileEntity'
+      attributes?: { __typename?: 'UploadFile'; url: string } | null
+    } | null
+  } | null
+}
+
 export type QueryGamesQueryVariables = Exact<{
   limit: Scalars['Int']['input']
 }>
@@ -1621,7 +1772,9 @@ export type QueryGamesBySlugQuery = {
   } | null
 }
 
-export type QueryHomeQueryVariables = Exact<{ [key: string]: never }>
+export type QueryHomeQueryVariables = Exact<{
+  date: Scalars['Date']['input']
+}>
 
 export type QueryHomeQuery = {
   __typename?: 'Query'
@@ -1653,5 +1806,228 @@ export type QueryHomeQuery = {
         } | null
       } | null
     }>
+  } | null
+  newGames?: {
+    __typename?: 'GameEntityResponseCollection'
+    data: Array<{
+      __typename?: 'GameEntity'
+      attributes?: {
+        __typename?: 'Game'
+        name: string
+        slug?: string | null
+        price: number
+        cover?: {
+          __typename?: 'UploadFileEntityResponse'
+          data?: {
+            __typename?: 'UploadFileEntity'
+            attributes?: { __typename?: 'UploadFile'; url: string } | null
+          } | null
+        } | null
+        developers?: {
+          __typename?: 'DeveloperRelationResponseCollection'
+          data: Array<{
+            __typename?: 'DeveloperEntity'
+            attributes?: { __typename?: 'Developer'; name: string } | null
+          }>
+        } | null
+      } | null
+    }>
+  } | null
+  upcommingGames?: {
+    __typename?: 'GameEntityResponseCollection'
+    data: Array<{
+      __typename?: 'GameEntity'
+      attributes?: {
+        __typename?: 'Game'
+        name: string
+        slug?: string | null
+        price: number
+        cover?: {
+          __typename?: 'UploadFileEntityResponse'
+          data?: {
+            __typename?: 'UploadFileEntity'
+            attributes?: { __typename?: 'UploadFile'; url: string } | null
+          } | null
+        } | null
+        developers?: {
+          __typename?: 'DeveloperRelationResponseCollection'
+          data: Array<{
+            __typename?: 'DeveloperEntity'
+            attributes?: { __typename?: 'Developer'; name: string } | null
+          }>
+        } | null
+      } | null
+    }>
+  } | null
+  freeGames?: {
+    __typename?: 'GameEntityResponseCollection'
+    data: Array<{
+      __typename?: 'GameEntity'
+      attributes?: {
+        __typename?: 'Game'
+        name: string
+        slug?: string | null
+        price: number
+        cover?: {
+          __typename?: 'UploadFileEntityResponse'
+          data?: {
+            __typename?: 'UploadFileEntity'
+            attributes?: { __typename?: 'UploadFile'; url: string } | null
+          } | null
+        } | null
+        developers?: {
+          __typename?: 'DeveloperRelationResponseCollection'
+          data: Array<{
+            __typename?: 'DeveloperEntity'
+            attributes?: { __typename?: 'Developer'; name: string } | null
+          }>
+        } | null
+      } | null
+    }>
+  } | null
+  sections?: {
+    __typename?: 'HomeEntityResponse'
+    data?: {
+      __typename?: 'HomeEntity'
+      attributes?: {
+        __typename?: 'Home'
+        newGames?: {
+          __typename?: 'ComponentPageSection'
+          title?: string | null
+          highlight?: {
+            __typename?: 'ComponentPageHighlight'
+            title: string
+            subtitle: string
+            buttonLink: string
+            buttonLabel: string
+            alignment?: Enum_Componentpagehighlight_Alignment | null
+            background: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            }
+            floatImage?: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            } | null
+          } | null
+        } | null
+        popularGames?: {
+          __typename?: 'ComponentPagePopularGames'
+          title: string
+          highlight?: {
+            __typename?: 'ComponentPageHighlight'
+            title: string
+            subtitle: string
+            buttonLink: string
+            buttonLabel: string
+            alignment?: Enum_Componentpagehighlight_Alignment | null
+            background: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            }
+            floatImage?: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            } | null
+          } | null
+          games?: {
+            __typename?: 'GameRelationResponseCollection'
+            data: Array<{
+              __typename?: 'GameEntity'
+              attributes?: {
+                __typename?: 'Game'
+                name: string
+                slug?: string | null
+                price: number
+                cover?: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      url: string
+                    } | null
+                  } | null
+                } | null
+                developers?: {
+                  __typename?: 'DeveloperRelationResponseCollection'
+                  data: Array<{
+                    __typename?: 'DeveloperEntity'
+                    attributes?: {
+                      __typename?: 'Developer'
+                      name: string
+                    } | null
+                  }>
+                } | null
+              } | null
+            }>
+          } | null
+        } | null
+        upcommingGames?: {
+          __typename?: 'ComponentPageSection'
+          title?: string | null
+          highlight?: {
+            __typename?: 'ComponentPageHighlight'
+            title: string
+            subtitle: string
+            buttonLink: string
+            buttonLabel: string
+            alignment?: Enum_Componentpagehighlight_Alignment | null
+            background: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            }
+            floatImage?: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            } | null
+          } | null
+        } | null
+        freeGames?: {
+          __typename?: 'ComponentPageSection'
+          title?: string | null
+          highlight?: {
+            __typename?: 'ComponentPageHighlight'
+            title: string
+            subtitle: string
+            buttonLink: string
+            buttonLabel: string
+            alignment?: Enum_Componentpagehighlight_Alignment | null
+            background: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            }
+            floatImage?: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            } | null
+          } | null
+        } | null
+      } | null
+    } | null
   } | null
 }
