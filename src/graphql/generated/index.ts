@@ -541,6 +541,7 @@ export type GenericMorph =
   | I18NLocale
   | Platform
   | Publisher
+  | Recommended
   | UploadFile
   | UploadFolder
   | UsersPermissionsPermission
@@ -711,6 +712,7 @@ export type Mutation = {
   deleteHome?: Maybe<HomeEntityResponse>
   deletePlatform?: Maybe<PlatformEntityResponse>
   deletePublisher?: Maybe<PublisherEntityResponse>
+  deleteRecommended?: Maybe<RecommendedEntityResponse>
   deleteUploadFile?: Maybe<UploadFileEntityResponse>
   deleteUploadFolder?: Maybe<UploadFolderEntityResponse>
   /** Delete an existing role */
@@ -736,6 +738,7 @@ export type Mutation = {
   updateHome?: Maybe<HomeEntityResponse>
   updatePlatform?: Maybe<PlatformEntityResponse>
   updatePublisher?: Maybe<PublisherEntityResponse>
+  updateRecommended?: Maybe<RecommendedEntityResponse>
   updateUploadFile?: Maybe<UploadFileEntityResponse>
   updateUploadFolder?: Maybe<UploadFolderEntityResponse>
   /** Update an existing role */
@@ -901,6 +904,10 @@ export type MutationUpdatePlatformArgs = {
 export type MutationUpdatePublisherArgs = {
   data: PublisherInput
   id: Scalars['ID']['input']
+}
+
+export type MutationUpdateRecommendedArgs = {
+  data: RecommendedInput
 }
 
 export type MutationUpdateUploadFileArgs = {
@@ -1074,6 +1081,7 @@ export type Query = {
   platforms?: Maybe<PlatformEntityResponseCollection>
   publisher?: Maybe<PublisherEntityResponse>
   publishers?: Maybe<PublisherEntityResponseCollection>
+  recommended?: Maybe<RecommendedEntityResponse>
   uploadFile?: Maybe<UploadFileEntityResponse>
   uploadFiles?: Maybe<UploadFileEntityResponseCollection>
   uploadFolder?: Maybe<UploadFolderEntityResponse>
@@ -1159,6 +1167,10 @@ export type QueryPublishersArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
 }
 
+export type QueryRecommendedArgs = {
+  publicationState?: InputMaybe<PublicationState>
+}
+
 export type QueryUploadFileArgs = {
   id?: InputMaybe<Scalars['ID']['input']>
 }
@@ -1197,6 +1209,30 @@ export type QueryUsersPermissionsUsersArgs = {
   filters?: InputMaybe<UsersPermissionsUserFiltersInput>
   pagination?: InputMaybe<PaginationArg>
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
+}
+
+export type Recommended = {
+  __typename?: 'Recommended'
+  createdAt?: Maybe<Scalars['DateTime']['output']>
+  publishedAt?: Maybe<Scalars['DateTime']['output']>
+  section: ComponentPagePopularGames
+  updatedAt?: Maybe<Scalars['DateTime']['output']>
+}
+
+export type RecommendedEntity = {
+  __typename?: 'RecommendedEntity'
+  attributes?: Maybe<Recommended>
+  id?: Maybe<Scalars['ID']['output']>
+}
+
+export type RecommendedEntityResponse = {
+  __typename?: 'RecommendedEntityResponse'
+  data?: Maybe<RecommendedEntity>
+}
+
+export type RecommendedInput = {
+  publishedAt?: InputMaybe<Scalars['DateTime']['input']>
+  section?: InputMaybe<ComponentPagePopularGamesInput>
 }
 
 export type ResponseCollectionMeta = {
@@ -2002,6 +2038,148 @@ export type QueryHomeQuery = {
           } | null
         } | null
         freeGames?: {
+          __typename?: 'ComponentPageSection'
+          title?: string | null
+          highlight?: {
+            __typename?: 'ComponentPageHighlight'
+            title: string
+            subtitle: string
+            buttonLink: string
+            buttonLabel: string
+            alignment?: Enum_Componentpagehighlight_Alignment | null
+            background: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            }
+            floatImage?: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            } | null
+          } | null
+        } | null
+      } | null
+    } | null
+  } | null
+}
+
+export type QueryRecommendedQueryVariables = Exact<{ [key: string]: never }>
+
+export type QueryRecommendedQuery = {
+  __typename?: 'Query'
+  recommended?: {
+    __typename?: 'RecommendedEntityResponse'
+    data?: {
+      __typename?: 'RecommendedEntity'
+      attributes?: {
+        __typename?: 'Recommended'
+        section: {
+          __typename?: 'ComponentPagePopularGames'
+          title: string
+          highlight?: {
+            __typename?: 'ComponentPageHighlight'
+            title: string
+            subtitle: string
+            buttonLink: string
+            buttonLabel: string
+            alignment?: Enum_Componentpagehighlight_Alignment | null
+            background: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            }
+            floatImage?: {
+              __typename?: 'UploadFileEntityResponse'
+              data?: {
+                __typename?: 'UploadFileEntity'
+                attributes?: { __typename?: 'UploadFile'; url: string } | null
+              } | null
+            } | null
+          } | null
+          games?: {
+            __typename?: 'GameRelationResponseCollection'
+            data: Array<{
+              __typename?: 'GameEntity'
+              attributes?: {
+                __typename?: 'Game'
+                name: string
+                slug?: string | null
+                price: number
+                cover?: {
+                  __typename?: 'UploadFileEntityResponse'
+                  data?: {
+                    __typename?: 'UploadFileEntity'
+                    attributes?: {
+                      __typename?: 'UploadFile'
+                      url: string
+                    } | null
+                  } | null
+                } | null
+                developers?: {
+                  __typename?: 'DeveloperRelationResponseCollection'
+                  data: Array<{
+                    __typename?: 'DeveloperEntity'
+                    attributes?: {
+                      __typename?: 'Developer'
+                      name: string
+                    } | null
+                  }>
+                } | null
+              } | null
+            }>
+          } | null
+        }
+      } | null
+    } | null
+  } | null
+}
+
+export type QueryUpcommingQueryVariables = Exact<{
+  date: Scalars['Date']['input']
+}>
+
+export type QueryUpcommingQuery = {
+  __typename?: 'Query'
+  upcommingGames?: {
+    __typename?: 'GameEntityResponseCollection'
+    data: Array<{
+      __typename?: 'GameEntity'
+      attributes?: {
+        __typename?: 'Game'
+        name: string
+        slug?: string | null
+        price: number
+        cover?: {
+          __typename?: 'UploadFileEntityResponse'
+          data?: {
+            __typename?: 'UploadFileEntity'
+            attributes?: { __typename?: 'UploadFile'; url: string } | null
+          } | null
+        } | null
+        developers?: {
+          __typename?: 'DeveloperRelationResponseCollection'
+          data: Array<{
+            __typename?: 'DeveloperEntity'
+            attributes?: { __typename?: 'Developer'; name: string } | null
+          }>
+        } | null
+      } | null
+    }>
+  } | null
+  showcase?: {
+    __typename?: 'HomeEntityResponse'
+    data?: {
+      __typename?: 'HomeEntity'
+      attributes?: {
+        __typename?: 'Home'
+        upcommingGames?: {
           __typename?: 'ComponentPageSection'
           title?: string | null
           highlight?: {
