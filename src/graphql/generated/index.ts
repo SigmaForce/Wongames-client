@@ -1704,6 +1704,7 @@ export type HighlightFragmentFragment = {
 
 export type QueryGamesQueryVariables = Exact<{
   limit: Scalars['Int']['input']
+  start?: InputMaybe<Scalars['Int']['input']>
 }>
 
 export type QueryGamesQuery = {

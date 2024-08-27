@@ -1,9 +1,11 @@
-import { gql } from '@apollo/client'
+import { gql, QueryHookOptions, useQuery } from '@apollo/client'
 import { GameFragment } from '../fragments/game'
+import { QueryGamesQuery } from '../generated/index'
+import { QueryGamesQueryVariables } from '../generated/index'
 
 export const QUERY_GAMES = gql`
-  query QueryGames($limit: Int!) {
-    games(pagination: { limit: $limit }) {
+  query QueryGames($limit: Int!, $start: Int) {
+    games(pagination: { limit: $limit, start: $start }) {
       data {
         attributes {
           ...GameFragment
@@ -73,3 +75,12 @@ export const QUERY_GAMES_BY_SLUG = gql`
     }
   }
 `
+
+export function useQueryGames(
+  options?: QueryHookOptions<QueryGamesQuery, QueryGamesQueryVariables>
+) {
+  return useQuery<QueryGamesQuery, QueryGamesQueryVariables>(
+    QUERY_GAMES,
+    options
+  )
+}
