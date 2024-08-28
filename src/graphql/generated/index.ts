@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -1705,6 +1706,11 @@ export type HighlightFragmentFragment = {
 export type QueryGamesQueryVariables = Exact<{
   limit: Scalars['Int']['input']
   start?: InputMaybe<Scalars['Int']['input']>
+  where?: InputMaybe<GameFiltersInput>
+  sort?: InputMaybe<
+    | Array<InputMaybe<Scalars['String']['input']>>
+    | InputMaybe<Scalars['String']['input']>
+  >
 }>
 
 export type QueryGamesQuery = {

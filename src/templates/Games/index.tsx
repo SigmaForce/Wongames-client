@@ -9,6 +9,7 @@ import { KeyboardArrowDown as ArrowDown } from '@styled-icons/material-outlined'
 
 import { useQueryGames } from '@/graphql/queries/games'
 import {} from '@/graphql/generated'
+import Empty from '@/components/Empty'
 
 export type GamesTemplateProps = {
   games?: GameCardProps[]
@@ -17,6 +18,7 @@ export type GamesTemplateProps = {
 
 const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
   const { data, loading, fetchMore } = useQueryGames({
+    notifyOnNetworkStatusChange: false,
     variables: { limit: 15 }
   })
   const handleFilter = () => {
@@ -40,24 +42,43 @@ const GamesTemplate = ({ filterItems }: GamesTemplateProps) => {
           <p>Loading...</p>
         ) : (
           <section>
-            <Grid>
-              {data?.games?.data.map((game) => (
-                <GameCard
-                  key={game.attributes?.slug}
-                  title={game.attributes!.name}
-                  slug={game.attributes?.slug}
-                  developer={
-                    game.attributes!.developers!.data[0].attributes!.name!
-                  }
-                  img={`http://localhost:1337${game.attributes!.cover!.data!.attributes!.url!}`}
-                  price={game.attributes!.price}
-                />
-              ))}
-            </Grid>
-            <S.ShowMore role="button" onClick={handleShowMore}>
-              <p>Show more</p>
-              <ArrowDown size={32} />
-            </S.ShowMore>
+            {data?.games?.data.length ? (
+              <>
+                <Grid>
+                  {data?.games?.data.map((game) => (
+                    <GameCard
+                      key={game.attributes?.slug}
+                      title={game.attributes!.name}
+                      slug={game.attributes?.slug}
+                      developer={
+                        game.attributes!.developers!.data[0].attributes!.name!
+                      }
+                      img={`http://localhost:1337${game.attributes!.cover!.data!.attributes!.url!}`}
+                      price={game.attributes!.price}
+                    />
+                  ))}
+                </Grid>
+                <S.ShowMore>
+                  {loading ? (
+                    <S.ShowMoreLoading
+                      src="/img/dots.svg"
+                      alt="Loading more games..."
+                    ></S.ShowMoreLoading>
+                  ) : (
+                    <S.ShowMoreButton role="button" onClick={handleShowMore}>
+                      <p>Show more</p>
+                      <ArrowDown size={32} />
+                    </S.ShowMoreButton>
+                  )}
+                </S.ShowMore>
+              </>
+            ) : (
+              <Empty
+                title=":("
+                description="We didn`t find any games with this filter"
+                hasLink
+              />
+            )}
           </section>
         )}
       </S.Main>
