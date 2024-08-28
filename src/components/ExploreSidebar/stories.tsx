@@ -12,7 +12,8 @@ export default {
     }
   },
   args: {
-    items
+    items,
+    onFilter: () => console.log('Filter')
   }
 } as Meta
 

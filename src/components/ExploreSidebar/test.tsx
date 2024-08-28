@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react'
+import { act, screen, waitFor } from '@testing-library/react'
 
 import ExploreSidebar from '.'
 import { renderWithTheme } from '@/utils/tests/helpers'
@@ -66,8 +66,6 @@ describe('<ExploreSidebar />', () => {
       />
     )
 
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
-
     await waitFor(() => {
       expect(onFilter).toHaveBeenCalledWith({
         platforms: ['windows'],
@@ -80,15 +78,17 @@ describe('<ExploreSidebar />', () => {
     const onFilter = jest.fn()
 
     renderWithTheme(<ExploreSidebar items={items} onFilter={onFilter} />)
-
-    userEvent.click(screen.getByRole('checkbox', { name: /windows/i }))
-    userEvent.click(screen.getByRole('radio', { name: /low to high/i }))
-
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
+    act(() => {
+      userEvent.click(screen.getByLabelText(/windows/i))
+      userEvent.click(screen.getByLabelText(/linux/i))
+      userEvent.click(screen.getByLabelText(/low to high/i))
+    })
+    // 1st render (initialValues) + 3 clicks
 
     await waitFor(() => {
+      expect(onFilter).toHaveBeenCalledTimes(4)
       expect(onFilter).toHaveBeenCalledWith({
-        platforms: ['windows'],
+        platforms: ['windows', 'linux'],
         sort_by: 'low-to-high'
       })
     })
@@ -101,8 +101,6 @@ describe('<ExploreSidebar />', () => {
 
     userEvent.click(screen.getByRole('radio', { name: /low to high/i }))
     userEvent.click(screen.getByRole('radio', { name: /high to low/i }))
-
-    userEvent.click(screen.getByRole('button', { name: /filter/i }))
 
     await waitFor(() => {
       expect(onFilter).toHaveBeenCalledWith({
