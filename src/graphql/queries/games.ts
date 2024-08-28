@@ -4,8 +4,17 @@ import { QueryGamesQuery } from '../generated/index'
 import { QueryGamesQueryVariables } from '../generated/index'
 
 export const QUERY_GAMES = gql`
-  query QueryGames($limit: Int!, $start: Int) {
-    games(pagination: { limit: $limit, start: $start }) {
+  query QueryGames(
+    $limit: Int!
+    $start: Int
+    $where: GameFiltersInput
+    $sort: [String]
+  ) {
+    games(
+      pagination: { limit: $limit, start: $start }
+      filters: $where
+      sort: $sort
+    ) {
       data {
         attributes {
           ...GameFragment
