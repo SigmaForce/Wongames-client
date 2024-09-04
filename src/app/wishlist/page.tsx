@@ -6,7 +6,7 @@ import gamesMock from '@/components/GameCardSlider/mock'
 import { initializeApollo } from '@/utils/apollo'
 
 import { QUERY_RECOMMENDED } from '@/graphql/queries/recommended'
-import { gamesMapper, highlightMapper } from '@/utils/mappers'
+import { gamesMapper, highlightMapper } from '@/utils/mappers/index'
 
 export default async function WishlistPage() {
   const apolloClient = initializeApollo()

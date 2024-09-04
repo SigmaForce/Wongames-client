@@ -10,6 +10,7 @@ export const gamesMock = {
       games: {
         data: [
           {
+            id: '1',
             attributes: {
               name: 'Wizardry 6+7',
               slug: 'wizardry_6_7',
@@ -49,6 +50,7 @@ export const fetchMoreMock = {
       games: {
         data: [
           {
+            id: '2',
             attributes: {
               name: 'Fallout: New Vegas Ultimate Edition',
               slug: 'fallout_new_vegas_ultimate_edition',

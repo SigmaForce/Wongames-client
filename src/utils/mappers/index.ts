@@ -15,16 +15,16 @@ export const bannerMapper = (banners: any) => {
 }
 
 export const gamesMapper = (games: any) => {
-  return (
-    games &&
-    games!.data.map((game: any) => ({
-      title: game.attributes!.name,
-      slug: game.attributes!.slug,
-      developer: game.attributes!.developers!.data[0].attributes!.name,
-      img: `http://localhost:1337${game.attributes!.cover!.data!.attributes!.url}`,
-      price: game.attributes!.price
-    }))
-  )
+  return games
+    ? games!.data.map((game: any) => ({
+        id: game.id,
+        title: game.attributes!.name,
+        slug: game.attributes!.slug,
+        developer: game.attributes!.developers!.data[0].attributes!.name,
+        img: `http://localhost:1337${game.attributes!.cover!.data!.attributes!.url}`,
+        price: game.attributes!.price
+      }))
+    : []
 }
 
 export const highlightMapper = (highlight: any) => {

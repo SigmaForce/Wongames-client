@@ -1,6 +1,6 @@
 'use client'
 
-import GameCard, { GameCardProps } from '@/components/GameCard'
+import GameCard from '@/components/GameCard'
 import * as S from './styles'
 import Base from '../Base'
 import ExploreSidebar, { ItemProps } from '@/components/ExploreSidebar'
@@ -12,7 +12,6 @@ import {} from '@/graphql/generated'
 import Empty from '@/components/Empty'
 
 export type GamesTemplateProps = {
-  games?: GameCardProps[]
   filterItems: ItemProps[]
 }
 

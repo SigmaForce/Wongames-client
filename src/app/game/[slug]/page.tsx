@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use server'
+
 import Game from '@/templates/Game'
 
 import { initializeApollo } from '@/utils/apollo'
-import { QUERY_GAMES_BY_SLUG } from '@/graphql/queries/games'
+import { QUERY_GAMES, QUERY_GAMES_BY_SLUG } from '@/graphql/queries/games'
 import {
   QueryGamesBySlugQuery,
+  QueryGamesQuery,
+  QueryGamesQueryVariables,
   QueryUpcommingQuery,
   QueryUpcommingQueryVariables
 } from '@/graphql/generated/index'
@@ -14,20 +16,46 @@ import { Enum_Game_Rating } from '@/graphql/generated'
 import { platform } from '@/components/GameDetails'
 import { GalleryImageProps } from '@/components/Gallery'
 import { QUERY_RECOMMENDED } from '@/graphql/queries/recommended'
-import { gamesMapper, highlightMapper } from '@/utils/mappers'
+import { gamesMapper, highlightMapper } from '@/utils/mappers/index'
 import { GameCardProps } from '@/components/GameCard'
 import { QUERY_UPCOMMING } from '@/graphql/queries/upcomming'
+import { notFound } from 'next/navigation'
+
+export const revalidate = 60
+
+export async function generateStaticParams() {
+  const apolloClient = initializeApollo()
+  const { data } = await apolloClient.query<
+    QueryGamesQuery,
+    QueryGamesQueryVariables
+  >({
+    query: QUERY_GAMES,
+    variables: { limit: 9 }
+  })
+
+  const slugs = data.games?.data.map((item) => {
+    return item.attributes?.slug
+  })
+
+  return slugs!.map((slug) => ({
+    slug
+  }))
+}
 
 export default async function Index({ params }: { params: { slug: string } }) {
   const apolloClient = initializeApollo()
-
   const { data } = await apolloClient.query<
     QueryGamesBySlugQuery,
     QueryGamesBySlugQueryVariables
   >({
     query: QUERY_GAMES_BY_SLUG,
-    variables: { slug: `${params?.slug}` }
+    variables: { slug: `${params?.slug}` },
+    fetchPolicy: 'no-cache'
   })
+
+  if (!data || !data.games?.data.length) {
+    notFound()
+  }
 
   const game = data.games!.data[0].attributes!
 

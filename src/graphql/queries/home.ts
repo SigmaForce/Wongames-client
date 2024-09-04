@@ -18,6 +18,7 @@ export const QUERY_HOME = gql`
       pagination: { limit: 8 }
     ) {
       data {
+        id
         attributes {
           ...GameFragment
         }
@@ -29,6 +30,7 @@ export const QUERY_HOME = gql`
       pagination: { limit: 8 }
     ) {
       data {
+        id
         attributes {
           ...GameFragment
         }
@@ -40,6 +42,7 @@ export const QUERY_HOME = gql`
       pagination: { limit: 8 }
     ) {
       data {
+        id
         attributes {
           ...GameFragment
         }
@@ -62,6 +65,7 @@ export const QUERY_HOME = gql`
             }
             games(pagination: { limit: 8 }) {
               data {
+                id
                 attributes {
                   ...GameFragment
                 }

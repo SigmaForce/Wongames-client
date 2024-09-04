@@ -1,9 +1,6 @@
-import GamesTemplate, { GamesTemplateProps } from '@/templates/Games'
+import GamesTemplate from '@/templates/Games'
 
-export const dynamic = 'auto'
-export const revalidate = 60 // Revalidate every 60 seconds
-
-export default async function GamesPage(props: GamesTemplateProps) {
+export default async function GamesPage() {
   const filterPrice = {
     title: 'Price',
     name: 'price_lte',
@@ -66,5 +63,5 @@ export default async function GamesPage(props: GamesTemplateProps) {
     filterCategories
   ]
 
-  return <GamesTemplate {...props} filterItems={filterItems} />
+  return <GamesTemplate filterItems={filterItems} />
 }

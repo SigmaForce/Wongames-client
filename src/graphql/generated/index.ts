@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -1753,6 +1752,7 @@ export type QueryGamesBySlugQuery = {
     __typename?: 'GameEntityResponseCollection'
     data: Array<{
       __typename?: 'GameEntity'
+      id?: string | null
       attributes?: {
         __typename?: 'Game'
         name: string
@@ -1854,6 +1854,7 @@ export type QueryHomeQuery = {
     __typename?: 'GameEntityResponseCollection'
     data: Array<{
       __typename?: 'GameEntity'
+      id?: string | null
       attributes?: {
         __typename?: 'Game'
         name: string
@@ -1880,6 +1881,7 @@ export type QueryHomeQuery = {
     __typename?: 'GameEntityResponseCollection'
     data: Array<{
       __typename?: 'GameEntity'
+      id?: string | null
       attributes?: {
         __typename?: 'Game'
         name: string
@@ -1906,6 +1908,7 @@ export type QueryHomeQuery = {
     __typename?: 'GameEntityResponseCollection'
     data: Array<{
       __typename?: 'GameEntity'
+      id?: string | null
       attributes?: {
         __typename?: 'Game'
         name: string
@@ -1989,6 +1992,7 @@ export type QueryHomeQuery = {
             __typename?: 'GameRelationResponseCollection'
             data: Array<{
               __typename?: 'GameEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Game'
                 name: string
@@ -2114,6 +2118,7 @@ export type QueryRecommendedQuery = {
             __typename?: 'GameRelationResponseCollection'
             data: Array<{
               __typename?: 'GameEntity'
+              id?: string | null
               attributes?: {
                 __typename?: 'Game'
                 name: string
@@ -2158,6 +2163,7 @@ export type QueryUpcommingQuery = {
     __typename?: 'GameEntityResponseCollection'
     data: Array<{
       __typename?: 'GameEntity'
+      id?: string | null
       attributes?: {
         __typename?: 'Game'
         name: string

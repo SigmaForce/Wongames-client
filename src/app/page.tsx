@@ -8,7 +8,11 @@ import {
 import { QUERY_HOME } from '@/graphql/queries/home'
 import { BannerProps } from '@/components/Banner'
 import { HighlightProps } from '@/components/Highlight'
-import { bannerMapper, gamesMapper, highlightMapper } from '@/utils/mappers'
+import {
+  bannerMapper,
+  gamesMapper,
+  highlightMapper
+} from '@/utils/mappers/index'
 import { GameCardProps } from '@/components/GameCard'
 
 export const revalidate = 60
@@ -20,7 +24,8 @@ export default async function Index() {
     data: { banners, newGames, upcommingGames, freeGames, sections }
   } = await apolloClient.query<QueryHomeQuery, QueryHomeQueryVariables>({
     query: QUERY_HOME,
-    variables: { date: TODAY }
+    variables: { date: TODAY },
+    fetchPolicy: 'no-cache'
   })
 
   const props: HomeTemplateProps = {

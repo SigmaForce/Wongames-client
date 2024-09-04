@@ -10,6 +10,7 @@ export const QUERY_UPCOMMING = gql`
       pagination: { limit: 8 }
     ) {
       data {
+        id
         attributes {
           ...GameFragment
         }
