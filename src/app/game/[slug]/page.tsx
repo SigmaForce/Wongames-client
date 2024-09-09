@@ -77,6 +77,7 @@ export default async function Index({ params }: { params: { slug: string } }) {
   const gameData = {
     cover: `http://localhost:1337${game.cover?.data?.attributes?.src}`,
     gameInfo: {
+      id: data.games.data[0].id!,
       title: game.name,
       price: game.price,
       description: game.short_description as string

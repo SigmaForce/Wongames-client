@@ -2,7 +2,6 @@
 import Cart, { CartProps } from '@/templates/Cart'
 import React from 'react'
 
-import itemsMock from '@/components/CartList/mock'
 import cardsMock from '@/components/PaymentOptions/mock'
 import { initializeApollo } from '@/utils/apollo'
 import { QUERY_RECOMMENDED } from '@/graphql/queries/recommended'
@@ -16,8 +15,6 @@ export default async function CartPage() {
   })
 
   const cartData: CartProps = {
-    items: itemsMock,
-    total: 'R$ 430,00',
     cards: cardsMock,
     recommendedTitle: data.recommended.data.attributes.section.title,
     recommendedGames: gamesMapper(

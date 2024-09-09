@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 import GameCard, { GameCardProps } from '.'
+import { CartContextData } from '@/hooks/use-cart'
 
 export default {
   title: 'GameCard',
@@ -49,10 +50,27 @@ export default {
   }
 } as Meta
 
-type Story = StoryObj<GameCardProps>
+type Story = StoryObj<GameCardProps & CartContextData>
 
 export const Default: Story = {
   args: {
+    title: 'Population Zero',
+    slug: 'population-zero',
+    developer: 'Rockstar Games',
+    img: 'https://www.gstatic.com/earth/social/03_knowledge_card_facebook-001.jpg',
+    price: 235,
+    promotionalPrice: 200
+  },
+  render: (args: GameCardProps) => (
+    <div style={{ width: '30rem' }}>
+      <GameCard {...args} />
+    </div>
+  )
+}
+
+export const IsInCart: Story = {
+  args: {
+    isInCart: () => true,
     title: 'Population Zero',
     slug: 'population-zero',
     developer: 'Rockstar Games',

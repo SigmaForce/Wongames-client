@@ -5,7 +5,7 @@ import { QueryGamesQueryVariables } from '../generated/index'
 
 export const QUERY_GAMES = gql`
   query QueryGames(
-    $limit: Int!
+    $limit: Int
     $start: Int
     $where: GameFiltersInput
     $sort: [String]
@@ -16,6 +16,7 @@ export const QUERY_GAMES = gql`
       sort: $sort
     ) {
       data {
+        id
         attributes {
           ...GameFragment
         }

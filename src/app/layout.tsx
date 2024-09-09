@@ -1,6 +1,8 @@
 'use client'
 import StyledComponentsRegistry from '@/lib/registry'
 import { Providers } from './providers'
+import { CartProvider } from '@/hooks/use-cart'
+
 import { poppins } from '../styles/fonts'
 import { ApolloProvider } from '@apollo/client'
 
@@ -17,7 +19,9 @@ export default function RootLayout({
       <body className={poppins.className}>
         <ApolloProvider client={client}>
           <StyledComponentsRegistry>
-            <Providers>{children}</Providers>
+            <CartProvider>
+              <Providers>{children}</Providers>
+            </CartProvider>
           </StyledComponentsRegistry>
         </ApolloProvider>
       </body>

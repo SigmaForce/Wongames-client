@@ -1,4 +1,4 @@
-import { bannerMapper, gamesMapper, highlightMapper } from '.'
+import { bannerMapper, cartMapper, gamesMapper, highlightMapper } from '.'
 
 describe('bannerMapper()', () => {
   it('should return the right format when mapped', () => {
@@ -124,5 +124,50 @@ describe('highlightMapper', () => {
       floatImage: 'http://localhost:1337/image.png',
       alignment: 'left'
     })
+  })
+})
+
+describe('cartMapper', () => {
+  it('should return an empty array if there are no games', () => {
+    expect(gamesMapper(null)).toStrictEqual([])
+  })
+
+  it('should render the correct format when mapped', () => {
+    const gamesItems = [
+      {
+        id: '1',
+        attributes: {
+          name: 'Sample Game',
+          slug: 'sample-game',
+          short_description: 'sample description',
+          price: 10.5,
+          developers: {
+            data: [
+              {
+                attributes: {
+                  name: 'sample developer'
+                }
+              }
+            ]
+          },
+          cover: {
+            data: {
+              attributes: {
+                url: '/sample-game.jpg'
+              }
+            }
+          }
+        }
+      }
+    ]
+
+    expect(cartMapper(gamesItems)).toStrictEqual([
+      {
+        id: '1',
+        img: 'http://localhost:1337/sample-game.jpg',
+        price: '$10.50',
+        title: 'Sample Game'
+      }
+    ])
   })
 })

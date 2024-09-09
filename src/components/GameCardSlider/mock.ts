@@ -1,5 +1,6 @@
 const mockCardSlider = [
   {
+    id: '1',
     title: 'The Witcher 3: Wild Hunt',
     slug: 'the-witcher-3',
     developer: 'CD Projekt Red',
@@ -8,6 +9,7 @@ const mockCardSlider = [
     promotionalPrice: 179
   },
   {
+    id: '2',
     title: 'Cyberpunk 2077',
     slug: 'cyberpunk-2077',
     developer: 'CD Projekt Red',
@@ -16,6 +18,7 @@ const mockCardSlider = [
     promotionalPrice: 230
   },
   {
+    id: '3',
     title: "Assassin's Creed Valhalla",
     slug: 'assassins-creed-valhalla',
     developer: 'Ubisoft',
@@ -24,6 +27,7 @@ const mockCardSlider = [
     promotionalPrice: 250
   },
   {
+    id: '4',
     title: 'Horizon Zero Dawn',
     slug: 'horizon-zero-dawn',
     developer: 'Guerrilla Games',
@@ -32,6 +36,7 @@ const mockCardSlider = [
     promotionalPrice: 190
   },
   {
+    id: '5',
     title: 'Ghost of Tsushima',
     slug: 'ghost-of-tsushima',
     developer: 'Sucker Punch Productions',
@@ -40,6 +45,7 @@ const mockCardSlider = [
     promotionalPrice: 240
   },
   {
+    id: '6',
     title: 'Red Dead Redemption 2',
     slug: 'red-dead-redemption-2',
     developer: 'Rockstar Games',

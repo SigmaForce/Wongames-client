@@ -1,3 +1,5 @@
+import formatPrice from '../format-price'
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const bannerMapper = (banners: any) => {
   return banners.data.map((banner: any) => ({
@@ -39,4 +41,16 @@ export const highlightMapper = (highlight: any) => {
       alignment: highlight.alignment
     }
   )
+}
+
+export const cartMapper = (items: any) => {
+  console.log(items)
+  return items
+    ? items.map((item: any) => ({
+        id: item.id,
+        img: `http://localhost:1337${item.attributes.cover.data.attributes.url}`,
+        price: formatPrice(item.attributes.price),
+        title: item.attributes.name
+      }))
+    : []
 }

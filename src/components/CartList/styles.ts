@@ -1,3 +1,4 @@
+'use client'
 import { tint } from 'polished'
 import styled, { css } from 'styled-components'
 import media from 'styled-media-query'
@@ -16,7 +17,6 @@ export const Wrapper = styled.main.withConfig({
     display: flex;
     flex-direction: column;
     align-self: start;
-
     ${isEmpty &&
     css`
       ${EmptyStyles.Wrapper} {
@@ -34,6 +34,26 @@ export const Wrapper = styled.main.withConfig({
       }
     `}
   `}
+`
+
+export const Loading = styled.div`
+  ${({ theme }) => css`
+    background: ${theme.colors.white};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40rem;
+    min-width: 56rem;
+    svg {
+      height: 10rem;
+      width: 10rem;
+    }
+  `}
+`
+
+export const GamesList = styled.div`
+  max-height: 40rem;
+  overflow-y: auto;
 `
 
 export const Footer = styled.div`

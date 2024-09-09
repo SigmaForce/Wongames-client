@@ -1703,7 +1703,7 @@ export type HighlightFragmentFragment = {
 }
 
 export type QueryGamesQueryVariables = Exact<{
-  limit: Scalars['Int']['input']
+  limit?: InputMaybe<Scalars['Int']['input']>
   start?: InputMaybe<Scalars['Int']['input']>
   where?: InputMaybe<GameFiltersInput>
   sort?: InputMaybe<
@@ -1718,6 +1718,7 @@ export type QueryGamesQuery = {
     __typename?: 'GameEntityResponseCollection'
     data: Array<{
       __typename?: 'GameEntity'
+      id?: string | null
       attributes?: {
         __typename?: 'Game'
         name: string

@@ -1,7 +1,5 @@
-import { screen } from '@testing-library/react'
-
+import { render, screen } from '@/utils/test-utils'
 import Banner from '.'
-import { renderWithTheme } from '@/utils/tests/helpers'
 
 const props = {
   img: 'https://www.gstatic.com/earth/social/03_knowledge_card_facebook-001.jpg',
@@ -13,7 +11,7 @@ const props = {
 
 describe('<Banner />', () => {
   it('should render correctly', () => {
-    const { container } = renderWithTheme(<Banner {...props} />)
+    const { container } = render(<Banner {...props} />)
     // verifique se o title existe renderizado
     expect(
       screen.getByRole('heading', { name: /Defy death/i })
@@ -29,7 +27,7 @@ describe('<Banner />', () => {
   })
 
   it('should render a Ribbon', () => {
-    renderWithTheme(
+    render(
       <Banner
         {...props}
         ribbon="My Ribbon"
