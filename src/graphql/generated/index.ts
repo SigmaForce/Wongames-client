@@ -1702,6 +1702,15 @@ export type HighlightFragmentFragment = {
   } | null
 }
 
+export type MutationRegisterMutationVariables = Exact<{
+  input: UsersPermissionsRegisterInput
+}>
+
+export type MutationRegisterMutation = {
+  __typename?: 'Mutation'
+  register: { __typename?: 'UsersPermissionsLoginPayload'; jwt?: string | null }
+}
+
 export type QueryGamesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>
   start?: InputMaybe<Scalars['Int']['input']>
